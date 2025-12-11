@@ -1,0 +1,175 @@
+Found main content:
+<main class="container-fluid">
+ <article class="doc-body" id="o_content">
+  <div role="main">
+   <section id="convert-leads-into-opportunities">
+    <h1>
+     Convert leads into opportunities
+     <a class="headerlink" href="#convert-leads-into-opportunities" title="Permalink to this headline">
+      ¶
+     </a>
+    </h1>
+    <p>
+     <em>
+      Leads
+     </em>
+     act as a qualifying step before an opportunity is created. This provides additional time to
+review its potential, and gauge its viability, before the opportunity is assigned to a salesperson.
+    </p>
+   </section>
+   <section id="configuration">
+    <h2>
+     Configuration
+     <a class="headerlink" href="#configuration" title="Permalink to this headline">
+      ¶
+     </a>
+    </h2>
+    <p>
+     To activate the
+     <em>
+      Leads
+     </em>
+     setting, navigate to
+     <span class="menuselection">
+      CRM app ‣ Configuration ‣ Settings
+     </span>
+     and check the box labeled,
+     <span class="guilabel">
+      Leads
+     </span>
+     . Then, click
+     <span class="guilabel">
+      Save
+     </span>
+     .
+    </p>
+    <img alt="Leads setting on CRM configuration page." class="align-center" src="../../../../_images/convert-leads-leads-setting.png"/>
+    <p>
+     Activating this feature adds a new menu option,
+     <span class="guilabel">
+      Leads
+     </span>
+     , to the header bar, located along
+the top of the screen.
+    </p>
+    <img alt="Leads menu on CRM application." class="align-center" src="../../../../_images/convert-leads-leads-menu.png"/>
+    <p>
+     Once the
+     <em>
+      Leads
+     </em>
+     setting has been activated, it applies to all sales teams by default. To turn off
+leads for a specific team, navigate to
+     <span class="menuselection">
+      CRM app ‣ Configuration ‣ Sales Teams
+     </span>
+     .
+Then, select a team from the list to open that team’s configuration page. Clear the
+     <span class="guilabel">
+      Leads
+     </span>
+     checkbox, located beneath the
+     <span class="guilabel">
+      Sales Team
+     </span>
+     field, then click
+     <span class="guilabel">
+      Save
+     </span>
+     .
+    </p>
+    <img alt="Leads menu on CRM application." class="align-center" src="../../../../_images/convert-leads-leads-button.png"/>
+   </section>
+   <section id="convert-a-lead-into-an-opportunity">
+    <h2>
+     Convert a lead into an opportunity
+     <a class="headerlink" href="#convert-a-lead-into-an-opportunity" title="Permalink to this headline">
+      ¶
+     </a>
+    </h2>
+    <p>
+     To convert a lead into an
+     <em>
+      opportunity
+     </em>
+     , navigate to
+     <span class="menuselection">
+      CRM app ‣ Leads
+     </span>
+     , and click
+on a lead from the list to open it.
+    </p>
+    <div class="alert alert-warning">
+     <p class="alert-title">
+      Warning
+     </p>
+     <p>
+      If a
+      <span class="guilabel">
+       Similar Leads
+      </span>
+      smart button appears at the top of the page for the lead, it
+indicates a similar lead or opportunity already exists in the database. Before converting this
+lead, click the smart button to confirm if the lead should be merged.
+     </p>
+     <img alt="Close up of a lead with emphasis on the Similar Leads smart button." class="align-center" src="../../../../_images/similar-leads-smart-button.png"/>
+    </div>
+    <p>
+     Click the
+     <span class="guilabel">
+      Convert to Opportunity
+     </span>
+     button, located at the top-left of the page.
+    </p>
+    <img alt="Create opportunity button on a lead record." class="align-center" src="../../../../_images/convert-leads-convert-opp-button.png"/>
+    <p>
+     This opens a
+     <span class="guilabel">
+      Convert to opportunity
+     </span>
+     pop-up modal. Here, in the
+     <span class="guilabel">
+      Conversion
+Action
+     </span>
+     field, select the
+     <span class="guilabel">
+      Convert to opportunity
+     </span>
+     option.
+    </p>
+    <div class="alert alert-primary">
+     <p class="alert-title">
+      Note
+     </p>
+     <p>
+      To merge this lead with an existing similar lead or opportunity, select
+      <span class="guilabel">
+       Merge with
+existing opportunities
+      </span>
+      in the
+      <span class="guilabel">
+       Conversion Action
+      </span>
+      field. This generates a list of the
+similar leads/opportunities to be merged.
+     </p>
+     <p>
+      When merging, Odoo gives priority to whichever lead/opportunity was created in the system first,
+merging the information into the first created lead/opportunity. However, if a lead and an
+opportunity are being merged, the resulting record is referred to as an opportunity, regardless
+of which record was created first.
+     </p>
+    </div>
+    <p>
+     Then, select a
+     <span class="guilabel">
+      Salesperson
+     </span>
+     and a
+     <span class="guilabel">
+      Sales Team
+     </span>
+     to which the opportunity should
+be assigned. Neither field is required, though if

@@ -18,7 +18,7 @@ export const checkHealth = async () => {
     }
 };
 
-export const login = async (username, password) => {
+export const login = async (username: string, password: string) => {
     const response = await api.post('/login', { username, password });
     return response.data;
 };
@@ -33,7 +33,17 @@ export const checkAuth = async () => {
     return response.data;
 };
 
-export const scrape = async (categoryUrl) => {
+export const scrape = async (categoryUrl: string) => {
     const response = await api.post('/scrape', { category_url: categoryUrl });
+    return response.data;
+};
+
+export const scrapeOdoo = async (url: string) => {
+    const response = await api.post('/scrape-odoo', { url });
+    return response.data;
+};
+
+export const scrapePromptingGuide = async (url: string) => {
+    const response = await api.post('/scrape-prompting-guide', { url });
     return response.data;
 };

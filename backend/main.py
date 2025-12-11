@@ -6,6 +6,8 @@ import uvicorn
 from models import LoginRequest, LoginResponse, ScrapeRequest, ScrapeResponse
 from auth_service import auth_service
 from scraper_service import scraper_service
+from scrapers.odoo_scraper import scrape_odoo
+from scrapers.prompting_guide_scraper import scrape_prompting_guide
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -19,6 +21,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class PublicScrapeRequest(BaseModel):
+    url: str
+
+class PublicScrapeResponse(BaseModel):
+    success: bool
+    markdown_content: str
+    message: str
 
 @app.get("/")
 def read_root():
@@ -53,6 +63,22 @@ def scrape(request: ScrapeRequest):
         articles=articles, 
         markdown_content=markdown
     )
+
+@app.post("/scrape-odoo", response_model=PublicScrapeResponse)
+def api_scrape_odoo(request: PublicScrapeRequest):
+    try:
+        markdown = scrape_odoo(request.url)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Odoo docs")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-prompting-guide", response_model=PublicScrapeResponse)
+def api_scrape_prompting_guide(request: PublicScrapeRequest):
+    try:
+        markdown = scrape_prompting_guide(request.url)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Prompting Guide")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)

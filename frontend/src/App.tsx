@@ -1,22 +1,10 @@
 import React, { useState } from 'react';
-import LoginForm from './components/LoginForm';
-import ScraperTool from './components/ScraperTool';
-import PreviewPane from './components/PreviewPane';
-import { Database, ShieldCheck } from 'lucide-react';
+import LoginRequiredTab from './components/LoginRequiredTab';
+import PublicDocsTab from './components/PublicDocsTab';
+import { Database, Lock, Globe } from 'lucide-react';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [markdown, setMarkdown] = useState('');
-  const [articles, setArticles] = useState<any[]>([]);
-
-  const handleLoginSuccess = () => {
-    setIsAuthenticated(true);
-  };
-
-  const handleScrapeSuccess = (md: string, arts: any[]) => {
-    setMarkdown(md);
-    setArticles(arts);
-  };
+  const [activeTab, setActiveTab] = useState<'login' | 'public'>('login');
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 relative overflow-hidden">
@@ -30,38 +18,45 @@ function App() {
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4 tracking-tight">
-          iSAMS Documentation Scraper
+          DocScraper Pro
         </h1>
         <p className="text-secondary text-lg max-w-2xl mx-auto">
-          Securely extract and format knowledge base articles for RAG ingestion.
+          Unified documentation extraction tool for iSAMS, Odoo, and more.
         </p>
       </header>
 
-      <main className="w-full max-w-5xl relative z-10">
-        {!isAuthenticated ? (
-          <LoginForm onLoginSuccess={handleLoginSuccess} />
-        ) : (
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-sm font-medium">
-                <ShieldCheck className="w-4 h-4" />
-                Session Authenticated
-              </div>
-            </div>
+      {/* Tab Navigation */}
+      <div className="relative z-10 mb-8 p-1 bg-surface/50 border border-white/5 rounded-xl flex gap-1">
+        <button
+          onClick={() => setActiveTab('login')}
+          className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${activeTab === 'login'
+              ? 'bg-primary text-white shadow-lg shadow-primary/25'
+              : 'text-secondary hover:text-foreground hover:bg-white/5'
+            }`}
+        >
+          <Lock className="w-4 h-4" />
+          Login Required
+        </button>
+        <button
+          onClick={() => setActiveTab('public')}
+          className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${activeTab === 'public'
+              ? 'bg-primary text-white shadow-lg shadow-primary/25'
+              : 'text-secondary hover:text-foreground hover:bg-white/5'
+            }`}
+        >
+          <Globe className="w-4 h-4" />
+          Public Docs
+        </button>
+      </div>
 
-            <ScraperTool onScrapeSuccess={handleScrapeSuccess} />
-
-            {markdown && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <PreviewPane markdown={markdown} />
-              </div>
-            )}
-          </div>
-        )}
+      <main className="w-full relative z-10">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          {activeTab === 'login' ? <LoginRequiredTab /> : <PublicDocsTab />}
+        </div>
       </main>
 
       <footer className="mt-16 text-secondary text-sm text-center">
-        <p>&copy; 2025 iSAMS Scraper Tool. Local Secure Environment.</p>
+        <p>&copy; 2025 DocScraper Pro. Local Secure Environment.</p>
       </footer>
     </div>
   );

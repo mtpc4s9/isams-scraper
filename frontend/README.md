@@ -71,3 +71,11 @@ export default defineConfig([
   },
 ])
 ```
+
+How to Use
+Start the backend: cd backend && uvicorn main:app --reload --port 8001
+Start the frontend: cd frontend && npm run dev
+Open the app in browser.
+Switch to "Public Docs" tab.
+Select "Odoo 18 Docs" or "Prompting Guide".
+Enter a URL and click "Scrape".
