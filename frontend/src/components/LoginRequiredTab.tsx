@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import ScraperTool from './ScraperTool';
 import PreviewPane from './PreviewPane';
-import { ShieldCheck } from 'lucide-react';
+import SubTabNavigation from './SubTabNavigation';
+import { ShieldCheck, User, Code } from 'lucide-react';
 
 const LoginRequiredTab: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [markdown, setMarkdown] = useState('');
     const [articles, setArticles] = useState<any[]>([]);
+    const [activeSubTab, setActiveSubTab] = useState<'user' | 'developer'>('user');
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
@@ -17,6 +19,11 @@ const LoginRequiredTab: React.FC = () => {
         setMarkdown(md);
         setArticles(arts);
     };
+
+    const subTabs = [
+        { id: 'user', label: 'User Documents', icon: <User className="w-4 h-4" /> },
+        { id: 'developer', label: 'Developer Documents', icon: <Code className="w-4 h-4" /> }
+    ];
 
     return (
         <div className="w-full max-w-5xl mx-auto">
@@ -29,9 +36,23 @@ const LoginRequiredTab: React.FC = () => {
                             <ShieldCheck className="w-4 h-4" />
                             Session Authenticated
                         </div>
+
+                        <SubTabNavigation
+                            tabs={subTabs}
+                            activeTabId={activeSubTab}
+                            onTabChange={(id) => {
+                                setActiveSubTab(id as any);
+                                setMarkdown(''); // Clear preview when switching
+                            }}
+                        />
                     </div>
 
-                    <ScraperTool onScrapeSuccess={handleScrapeSuccess} />
+                    <div key={activeSubTab} className="animate-in fade-in duration-300">
+                        <ScraperTool
+                            onScrapeSuccess={handleScrapeSuccess}
+                            scraperType={activeSubTab === 'user' ? 'isams' : 'isams-developer'}
+                        />
+                    </div>
 
                     {markdown && (
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">

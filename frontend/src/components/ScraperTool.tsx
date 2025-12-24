@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { scrape } from '../api';
-import { Search, Loader2, FileText, Download, CheckCircle } from 'lucide-react';
+import { scrape, scrapeIsamsDeveloper } from '../api';
+import { Search, Loader2, FileText, CheckCircle } from 'lucide-react';
 
 interface ScraperToolProps {
     onScrapeSuccess: (markdown: string, articles: any[]) => void;
+    scraperType?: 'isams' | 'isams-developer';
 }
 
-const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess }) => {
+const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType = 'isams' }) => {
     const [url, setUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState('');
@@ -16,14 +17,19 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess }) => {
         setLoading(true);
         setStatus('Initializing scraper...');
         try {
-            // Simulate progress updates (since backend is synchronous for now)
-            setTimeout(() => setStatus('Navigating to category...'), 1000);
-            setTimeout(() => setStatus('Extracting articles...'), 3000);
+            // Simulate progress updates
+            setTimeout(() => setStatus('Navigating to documentation...'), 1000);
+            setTimeout(() => setStatus('Extracting content...'), 3000);
 
-            const response = await scrape(url);
+            const response = scraperType === 'isams'
+                ? await scrape(url)
+                : await scrapeIsamsDeveloper(url);
+
             if (response.success) {
                 setStatus('Processing content...');
-                onScrapeSuccess(response.markdown_content, response.articles);
+                // For isams-developer, 'articles' might be empty or different structure, 
+                // but we primarily care about markdown_content
+                onScrapeSuccess(response.markdown_content, response.articles || []);
                 setStatus('Completed!');
             } else {
                 setStatus(`Error: ${response.message}`);

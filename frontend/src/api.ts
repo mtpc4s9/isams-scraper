@@ -47,3 +47,8 @@ export const scrapePromptingGuide = async (url: string) => {
     const response = await api.post('/scrape-prompting-guide', { url });
     return response.data;
 };
+
+export const scrapeIsamsDeveloper = async (url: string) => {
+    const response = await api.post('/scrape-isams-developer', { url });
+    return response.data;
+};

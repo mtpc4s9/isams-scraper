@@ -8,6 +8,7 @@ from auth_service import auth_service
 from scraper_service import scraper_service
 from scrapers.odoo_scraper import scrape_odoo
 from scrapers.prompting_guide_scraper import scrape_prompting_guide
+from scrapers.isams_developer_scraper import scrape_isams_developer
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -77,6 +78,15 @@ def api_scrape_prompting_guide(request: PublicScrapeRequest):
     try:
         markdown = scrape_prompting_guide(request.url)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Prompting Guide")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-isams-developer", response_model=PublicScrapeResponse)
+def api_scrape_isams_developer(request: PublicScrapeRequest):
+    try:
+        driver = auth_service.get_driver()
+        markdown = scrape_isams_developer(request.url, driver)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped iSAMS Developer Docs")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

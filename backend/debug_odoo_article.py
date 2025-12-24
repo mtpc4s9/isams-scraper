@@ -2,7 +2,7 @@ from scrapers.odoo_scraper import scrape_odoo_article
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://www.odoo.com/documentation/18.0/applications/essentials/activities.html"
+url = "https://www.odoo.com/documentation/18.0/applications/finance/accounting/bank.html"
 
 print(f"Testing Odoo Article Scraper with {url}...")
 

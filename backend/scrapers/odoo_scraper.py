@@ -84,6 +84,9 @@ def scrape_odoo_article(url):
                     
                     # Process children of section
                     for child in element.children:
+                        # Skip the header we just processed
+                        if child == h_tag:
+                            continue
                         md_out += process_element(child, depth + 1)
                         
                 elif element.name == 'p':
