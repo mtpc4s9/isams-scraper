@@ -1,50 +1,115 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --radius-xl: var(--radius);
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 
 :root {
-  --background: #0f172a; /* Slate 900 */
-  --foreground: #e2e8f0; /* Slate 200 */
-  --primary: #3b82f6; /* Blue 500 */
-  --secondary: #64748b; /* Slate 500 */
-  --accent: #06b6d4; /* Cyan 500 */
-  --surface: #1e293b; /* Slate 800 */
+  --background: #f8fafc;
+  /* Slate 50 (Light Mode Default) */
+  --foreground: #1e293b;
+  /* Slate 800 */
+  --primary: #3b82f6;
+  /* Blue 500 */
+  --primary-foreground: #ffffff;
+  --secondary: #64748b;
+  /* Slate 500 */
+  --secondary-foreground: #f8fafc;
+  --accent: #f97316;
+  /* Orange 500 (CTA) */
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  /* Slate 200 */
+  --ring: #3b82f6;
+  --radius: 0.75rem;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+.dark {
+  --background: #0f172a;
+  /* Slate 900 */
+  --foreground: #f8fafc;
+  /* Slate 50 */
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #475569;
+  /* Slate 600 */
+  --secondary-foreground: #f8fafc;
+  --accent: #f97316;
+  --surface: #1e293b;
+  /* Slate 800 */
+  --border: #334155;
+  /* Slate 700 */
+  --ring: #3b82f6;
 }
 
-/* Glassmorphism Utilities */
-.glass {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Fira Sans', sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-mono {
+    font-family: 'Fira Code', monospace;
+  }
 }
 
-.glass-card {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+@layer components {
+  .glass {
+    @apply bg-surface/80 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-surface/40 backdrop-blur-lg border border-white/5 shadow-xl;
+  }
+
+  .bento-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+  }
+
+  .bento-item {
+    @apply p-6 rounded-2xl border border-border bg-surface transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:shadow-lg hover:shadow-primary/25 active:scale-95 transition-all duration-200;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--background); 
+  @apply bg-background;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary); 
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary); 
+  @apply bg-secondary/30 rounded-full hover:bg-primary/50 transition-colors;
 }

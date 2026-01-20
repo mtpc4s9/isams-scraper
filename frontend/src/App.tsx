@@ -1,63 +1,49 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LoginRequiredTab from './components/LoginRequiredTab';
 import PublicDocsTab from './components/PublicDocsTab';
-import { Database, Lock, Globe } from 'lucide-react';
+import Sidebar from './components/Sidebar';
+import TopNav from './components/TopNav';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'login' | 'public'>('login');
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center py-12 px-4 relative overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse-slow" />
+    <div className="flex min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary">
+      {/* Sidebar - Persistent */}
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <header className="mb-12 text-center relative z-10">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="p-3 bg-surface border border-white/10 rounded-xl shadow-lg shadow-primary/20">
-            <Database className="w-8 h-8 text-primary" />
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopNav />
+
+        <main className="flex-1 overflow-y-auto p-8 relative">
+          {/* Ambient Background Glow for Content */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] -z-10" />
+
+          <div className="max-w-6xl mx-auto w-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="w-full"
+              >
+                {activeTab === 'login' ? <LoginRequiredTab /> : <PublicDocsTab />}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4 tracking-tight">
-          DocScraper Pro
-        </h1>
-        <p className="text-secondary text-lg max-w-2xl mx-auto">
-          Unified documentation extraction tool for iSAMS, Odoo, and more.
-        </p>
-      </header>
+        </main>
 
-      {/* Tab Navigation */}
-      <div className="relative z-10 mb-8 p-1 bg-surface/50 border border-white/5 rounded-xl flex gap-1">
-        <button
-          onClick={() => setActiveTab('login')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${activeTab === 'login'
-              ? 'bg-primary text-white shadow-lg shadow-primary/25'
-              : 'text-secondary hover:text-foreground hover:bg-white/5'
-            }`}
-        >
-          <Lock className="w-4 h-4" />
-          Login Required
-        </button>
-        <button
-          onClick={() => setActiveTab('public')}
-          className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${activeTab === 'public'
-              ? 'bg-primary text-white shadow-lg shadow-primary/25'
-              : 'text-secondary hover:text-foreground hover:bg-white/5'
-            }`}
-        >
-          <Globe className="w-4 h-4" />
-          Public Docs
-        </button>
+        <footer className="p-4 border-t border-border bg-surface/50 text-center">
+          <p className="text-secondary text-xs font-medium">
+            &copy; 2025 DocScraper Pro &bull; Developed by Antigravity &bull; Local Secure Environment
+          </p>
+        </footer>
       </div>
-
-      <main className="w-full relative z-10">
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          {activeTab === 'login' ? <LoginRequiredTab /> : <PublicDocsTab />}
-        </div>
-      </main>
-
-      <footer className="mt-16 text-secondary text-sm text-center">
-        <p>&copy; 2025 DocScraper Pro. Local Secure Environment.</p>
-      </footer>
     </div>
   );
 }

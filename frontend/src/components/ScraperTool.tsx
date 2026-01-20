@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { scrape, scrapeIsamsDeveloper } from '../api';
-import { Search, Loader2, FileText, CheckCircle } from 'lucide-react';
+import { Search, Loader2, FileText, CheckCircle, AlertCircle, Globe } from 'lucide-react';
+import { cn } from '../lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ScraperToolProps {
     onScrapeSuccess: (markdown: string, articles: any[]) => void;
@@ -15,22 +17,31 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
     const handleScrape = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setStatus('Initializing scraper...');
+        setStatus('Initializing...');
         try {
-            // Simulate progress updates
-            setTimeout(() => setStatus('Navigating to documentation...'), 1000);
-            setTimeout(() => setStatus('Extracting content...'), 3000);
+            // Simulate progression
+            const steps = [
+                'Navigating to source...',
+                'Parsing HTML structure...',
+                'Extracting documentation body...',
+                'Formatting to Markdown...'
+            ];
+
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < steps.length) setStatus(steps[i++]);
+                else clearInterval(timer);
+            }, 1500);
 
             const response = scraperType === 'isams'
                 ? await scrape(url)
                 : await scrapeIsamsDeveloper(url);
 
+            clearInterval(timer);
+
             if (response.success) {
-                setStatus('Processing content...');
-                // For isams-developer, 'articles' might be empty or different structure, 
-                // but we primarily care about markdown_content
                 onScrapeSuccess(response.markdown_content, response.articles || []);
-                setStatus('Completed!');
+                setStatus('Extraction Successful');
             } else {
                 setStatus(`Error: ${response.message}`);
             }
@@ -42,38 +53,65 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
     };
 
     return (
-        <div className="glass-card p-6 rounded-2xl mb-8">
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Search className="text-accent" />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                    Target Category
-                </span>
-            </h3>
-            <form onSubmit={handleScrape} className="flex gap-4">
-                <input
-                    type="url"
-                    placeholder="https://support.isams.com/hc/en-us/categories/..."
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    className="flex-1 bg-surface/50 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-secondary focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
-                    required
-                />
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-surface hover:bg-white/10 border border-white/10 text-white font-medium py-3 px-6 rounded-xl transition-all disabled:opacity-50 flex items-center gap-2"
-                >
-                    {loading ? <Loader2 className="animate-spin" /> : <FileText />}
-                    {loading ? 'Processing' : 'Extract'}
-                </button>
-            </form>
-
-            {status && (
-                <div className={`mt-4 flex items-center gap-2 text-sm ${status.includes('Error') ? 'text-red-400' : 'text-accent'}`}>
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : status.includes('Error') ? null : <CheckCircle className="w-4 h-4" />}
-                    {status}
+        <div className="bento-item bg-surface/30 backdrop-blur-sm border-2 border-border shadow-inner">
+            <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-accent/10 rounded-lg">
+                    <Globe className="w-5 h-5 text-accent" />
                 </div>
-            )}
+                <div>
+                    <h3 className="font-bold text-lg tracking-tight">Source Configuration</h3>
+                    <p className="text-secondary text-xs font-semibold uppercase tracking-wider">Configure extraction parameters</p>
+                </div>
+            </div>
+
+            <form onSubmit={handleScrape} className="space-y-4">
+                <div className="relative group">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                        <Search className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                    </div>
+                    <input
+                        type="url"
+                        placeholder="Paste iSAMS Documentation URL here..."
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                        required
+                    />
+                </div>
+
+                <div className="flex items-center justify-between gap-4 pt-2">
+                    <div className="flex-1">
+                        <AnimatePresence mode="wait">
+                            {status && (
+                                <motion.div
+                                    key={status}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                    className={cn(
+                                        "flex items-center gap-2 text-xs font-bold uppercase tracking-widest",
+                                        status.includes('Error') ? "text-red-500" : "text-primary"
+                                    )}
+                                >
+                                    {loading ? <Loader2 className="w-3 h-3 animate-spin" /> :
+                                        status.includes('Error') ? <AlertCircle className="w-3 h-3" /> :
+                                            <CheckCircle className="w-3 h-3" />}
+                                    {status}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="btn-primary flex items-center gap-2 py-3 px-8 shadow-xl shadow-primary/10"
+                    >
+                        {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+                        <span className="font-bold uppercase tracking-wider text-xs">Run Extraction Task</span>
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };
