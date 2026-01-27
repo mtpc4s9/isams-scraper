@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { scrape, scrapeIsamsDeveloper } from '../api';
+import { scrape, scrapeIsamsDeveloper, scrapeToddle } from '../api';
 import { Search, Loader2, FileText, CheckCircle, AlertCircle, Globe } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ScraperToolProps {
     onScrapeSuccess: (markdown: string, articles: any[]) => void;
-    scraperType?: 'isams' | 'isams-developer';
+    scraperType?: 'isams' | 'isams-developer' | 'toddle';
 }
 
 const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType = 'isams' }) => {
@@ -35,7 +35,9 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
 
             const response = scraperType === 'isams'
                 ? await scrape(url)
-                : await scrapeIsamsDeveloper(url);
+                : scraperType === 'isams-developer'
+                    ? await scrapeIsamsDeveloper(url)
+                    : await scrapeToddle(url);
 
             clearInterval(timer);
 
@@ -71,7 +73,7 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
                     </div>
                     <input
                         type="url"
-                        placeholder="Paste iSAMS Documentation URL here..."
+                        placeholder={scraperType === 'toddle' ? 'Paste Toddle Collection URL (e.g., https://support.toddleapp.com/en/collections/...)' : 'Paste iSAMS Documentation URL here...'}
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"

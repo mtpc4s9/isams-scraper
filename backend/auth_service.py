@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -14,87 +15,61 @@ logger = logging.getLogger(__name__)
 class AuthService:
     def __init__(self):
         self.driver = None
+        self.project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.user_data_dir = os.path.join(self.project_dir, 'chrome_profile')
 
-    def get_driver(self):
-        if not self.driver:
-            options = Options()
-            # options.add_argument("--headless") # Comment out for debugging
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
+    def get_driver(self, interactive=False):
+        # Check if existing driver is still alive
+        if self.driver:
+            try:
+                _ = self.driver.current_url
+                return self.driver
+            except:
+                try: self.driver.quit()
+                except: pass
+                self.driver = None
+        
+        options = Options()
+        options.add_argument(f"--user-data-dir={self.user_data_dir}")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        
+        if interactive:
+            options.add_experimental_option("detach", True)
+        else:
+            # options.add_argument("--headless") # Headless would lose the session if not careful
+            pass
             
-            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         return self.driver
 
-    def login(self, username, password):
+    def launch_login(self, target_url="https://support.toddleapp.com/"):
+        """Launch a persistent browser window for the user to log in."""
         try:
-            driver = self.get_driver()
-            driver.get("https://identity.isams.com/")
-            
-            # Wait for redirect to login page
-            WebDriverWait(driver, 15).until(
-                EC.url_contains("/login/")
-            )
-
-            # Wait for login form elements to be ready
-            WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.ID, "username"))
-            )
-            
-            # Enter credentials
-            username_field = driver.find_element(By.ID, "username")
-            username_field.clear()
-            username_field.send_keys(username)
-            
-            password_field = driver.find_element(By.ID, "password")
-            password_field.clear()
-            password_field.send_keys(password)
-            
-            # Click login
-            login_btn = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "button[class*='sfdc_button']"))
-            )
-            login_btn.click()
-            
-            # Wait for successful redirect or indicator
-            # Adjust this selector based on actual post-login page
-            time.sleep(5) # Temporary wait to ensure login processes
-            
-            # Check if we are still on login page or have error
-            if "identity.isams.com" in driver.current_url and "error" in driver.page_source.lower():
-                return False, "Login failed. Check credentials."
-                
-            return True, "Login successful"
-            
+            driver = self.get_driver(interactive=True)
+            driver.get(target_url)
+            logger.info(f"Persistent browser opened at {target_url}")
+            return True, "Persistent browser opened for login"
         except Exception as e:
-            logger.error(f"Login error: {str(e)}")
-            return False, f"Login error: {str(e)}"
-
-    def open_login_page(self):
-        driver = self.get_driver()
-        try:
-            driver.get("https://identity.isams.com/")
-            return True, "Login page opened"
-        except Exception as e:
-            logger.error(f"Failed to open browser: {str(e)}")
-            return False, f"Failed to open browser: {str(e)}"
+            logger.error(f"Failed to launch login: {e}")
+            return False, str(e)
 
     def check_authentication(self):
         if not self.driver:
             return False, "Browser not started"
         try:
-            # Check if we are still on the login page
-            # Login page usually has '/login/' in the URL
             current_url = self.driver.current_url
-            if "/login/" not in current_url:
-                 return True, "Authenticated"
-            
-            return False, f"Still on login page. Current URL: {current_url}"
+            if "login" not in current_url.lower():
+                return True, "Authenticated"
+            return False, f"Likely on login page: {current_url}"
         except Exception as e:
-            return False, f"Error checking auth: {str(e)}"
+            self.driver = None
+            return False, str(e)
 
     def close(self):
         if self.driver:
-            self.driver.quit()
+            try: self.driver.quit()
+            except: pass
             self.driver = None
 
 auth_service = AuthService()

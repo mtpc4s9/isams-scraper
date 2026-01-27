@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8001';
+const API_URL = 'http://localhost:8002';
 
 export const api = axios.create({
     baseURL: API_URL,
@@ -50,5 +50,10 @@ export const scrapePromptingGuide = async (url: string) => {
 
 export const scrapeIsamsDeveloper = async (url: string) => {
     const response = await api.post('/scrape-isams-developer', { url });
+    return response.data;
+};
+
+export const scrapeToddle = async (url: string) => {
+    const response = await api.post('/scrape-toddle', { url });
     return response.data;
 };

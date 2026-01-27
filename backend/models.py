@@ -21,6 +21,14 @@ class Article(BaseModel):
     content: str
     related_articles: List[str]
 
+class ToddleArticle(BaseModel):
+    entity: str  # Collection name (e.g., "Educators")
+    topic: str  # Topic name (e.g., "Getting Started")
+    article: str  # Article title
+    link: str  # Full article URL
+    content: str  # Article content in markdown
+
+
 class ScrapeResponse(BaseModel):
     success: bool
     message: str

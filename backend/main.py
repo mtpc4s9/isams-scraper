@@ -9,11 +9,17 @@ from scraper_service import scraper_service
 from scrapers.odoo_scraper import scrape_odoo
 from scrapers.prompting_guide_scraper import scrape_prompting_guide
 from scrapers.isams_developer_scraper import scrape_isams_developer
+from scrapers.toddle_scraper import scrape_toddle
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
 # CORS Configuration
-origins = ["*"]
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -45,7 +51,7 @@ def login(request: LoginRequest):
 
 @app.post("/launch-login")
 def launch_login():
-    success, message = auth_service.open_login_page()
+    success, message = auth_service.launch_login()
     return {"success": success, "message": message}
 
 @app.get("/check-auth")
@@ -90,5 +96,15 @@ def api_scrape_isams_developer(request: PublicScrapeRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/scrape-toddle", response_model=PublicScrapeResponse)
+def api_scrape_toddle(request: PublicScrapeRequest):
+    try:
+        driver = auth_service.get_driver()
+        articles_list, markdown = scrape_toddle(request.url, driver)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Toddle Documentation")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8002, reload=False)

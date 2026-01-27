@@ -10,34 +10,70 @@ logger = logging.getLogger(__name__)
 
 class ScraperService:
     def scrape_category(self, category_url: str):
+        # Smart Routing: Detect if this is actually a Toddle URL
+        if "toddleapp.com" in category_url:
+            logger.info(f"Toddle URL detected in iSAMS scraper: {category_url}. Redirecting...")
+            from scrapers.toddle_scraper import scrape_toddle
+            driver = auth_service.get_driver()
+            if not driver:
+                return False, "Browser not initialized. Please click 'Initialize' in the browser or 'Launch Login' first.", [], ""
+            
+            try:
+                articles_list, markdown = scrape_toddle(category_url, driver)
+                if "Error:" in markdown:
+                    return False, markdown, [], ""
+                
+                # Convert dicts to Article objects
+                articles = []
+                for a in articles_list:
+                    articles.append(Article(
+                        module_name=a.get('entity', 'Unknown'),
+                        category_level_1=a.get('topic', 'Unknown'),
+                        category_level_2=a.get('topic', 'Unknown'),
+                        article_name=a.get('article', 'Untitled'),
+                        article_url=a.get('link', ''),
+                        content=a.get('content', ''),
+                        related_articles=[]
+                    ))
+                
+                return True, f"Successfully scraped {len(articles)} Toddle articles", articles, markdown
+            except Exception as e:
+                logger.error(f"Toddle delegation error: {str(e)}")
+                return False, f"Toddle extraction failed: {str(e)}", [], ""
+
         driver = auth_service.get_driver()
         if not driver:
-            return False, "Not authenticated", []
+            return False, "Browser not initialized. Please click 'Initialize' or 'Launch Login' first.", [], ""
 
         try:
-            driver.get(category_url)
-            time.sleep(3) # Wait for page load
+            # Check if driver is already on the page or needs to navigate
+            if driver.current_url != category_url:
+                driver.get(category_url)
+                time.sleep(3) # Wait for page load
             
             # Get all article links
-            # This selector needs to be adjusted based on actual Zendesk theme
-            # Common pattern: .article-list-item > a, or .category-article > a
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             
-            # Try to find article links. This is a heuristic.
-            # Look for links that contain '/articles/'
+            # Try to find article links. This is a heuristic for Zendesk category pages.
             article_links = []
             for a in soup.find_all('a', href=True):
-                if '/articles/' in a['href']:
+                if '/articles/' in a['href'] and not any(x in a['href'] for x in ['/requests/', '/login', '/signup']):
                     full_url = a['href']
                     if not full_url.startswith('http'):
-                        # Construct full URL if relative
                         base_url = category_url.split('/hc/')[0]
-                        full_url = base_url + full_url
+                        full_url = base_url + ('' if full_url.startswith('/') else '/') + full_url
                     if full_url not in article_links:
                         article_links.append(full_url)
             
             logger.info(f"Found {len(article_links)} articles")
             
+            if not article_links:
+                # If no links found, maybe they provided a single article URL?
+                if "/articles/" in category_url:
+                    article_links = [category_url]
+                else:
+                    return False, "No articles found on this page. If this is a single article, ensure the URL contains '/articles/'.", [], ""
+
             articles = []
             markdown_output = ""
             
@@ -47,11 +83,11 @@ class ScraperService:
                     articles.append(article_data)
                     markdown_output += self.format_article_markdown(article_data)
             
-            return True, "Scraping completed", articles, markdown_output
+            return True, f"Successfully scraped {len(articles)} articles", articles, markdown_output
 
         except Exception as e:
             logger.error(f"Scrape category error: {str(e)}")
-            return False, f"Error: {str(e)}", [], ""
+            return False, f"Scraping failed: {str(e)}", [], ""
 
     def scrape_article(self, driver, url):
         try:

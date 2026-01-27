@@ -3,13 +3,13 @@ import LoginForm from './LoginForm';
 import ScraperTool from './ScraperTool';
 import PreviewPane from './PreviewPane';
 import SubTabNavigation from './SubTabNavigation';
-import { ShieldCheck, User, Code } from 'lucide-react';
+import { ShieldCheck, User, Code, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LoginRequiredTab = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [markdown, setMarkdown] = useState('');
-    const [activeSubTab, setActiveSubTab] = useState<'user' | 'developer'>('user');
+    const [activeSubTab, setActiveSubTab] = useState<'user' | 'developer' | 'toddle'>('user');
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
@@ -21,7 +21,8 @@ const LoginRequiredTab = () => {
 
     const subTabs = [
         { id: 'user', label: 'User Documents', icon: <User className="w-4 h-4" /> },
-        { id: 'developer', label: 'Developer Documents', icon: <Code className="w-4 h-4" /> }
+        { id: 'developer', label: 'Developer Documents', icon: <Code className="w-4 h-4" /> },
+        { id: 'toddle', label: 'Toddle Support', icon: <GraduationCap className="w-4 h-4" /> }
     ];
 
     return (
@@ -71,7 +72,7 @@ const LoginRequiredTab = () => {
                             <div className="md:col-span-3">
                                 <ScraperTool
                                     onScrapeSuccess={handleScrapeSuccess}
-                                    scraperType={activeSubTab === 'user' ? 'isams' : 'isams-developer'}
+                                    scraperType={activeSubTab === 'user' ? 'isams' : activeSubTab === 'developer' ? 'isams-developer' : 'toddle'}
                                 />
                             </div>
                         </div>
