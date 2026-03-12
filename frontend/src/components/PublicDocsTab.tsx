@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide } from '../api';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools'>('odoo');
     const [url, setUrl] = useState('');
     const [markdown, setMarkdown] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,9 @@ const PublicDocsTab = () => {
 
             const response = activeTool === 'odoo'
                 ? await scrapeOdoo(url)
-                : await scrapePromptingGuide(url);
+                : activeTool === 'prompting'
+                    ? await scrapePromptingGuide(url)
+                    : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -58,6 +60,13 @@ const PublicDocsTab = () => {
             icon: <Terminal className="w-5 h-5 text-orange-500" />,
             desc: 'PromptingGuide.ai content retrieval.',
             placeholder: 'https://www.promptingguide.ai/...'
+        },
+        {
+            id: 'flexischools',
+            label: 'Flexischools Support',
+            icon: <BookOpen className="w-5 h-5 text-green-500" />,
+            desc: 'Extract categories, articles & related links.',
+            placeholder: 'https://support.flexischools.com.au/parents'
         }
     ];
 

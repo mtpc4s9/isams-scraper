@@ -1,0 +1,411 @@
+<main id="main-content">
+ <div class="hs-kb-content-wrapper--responsive-spacing">
+  <div class="hs-kb-breadcrumb-container">
+   <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_breadcrumbs" style="">
+    <ol class="hs-kb-breadcrumbs">
+     <li class="hs-kb-breadcrumb_item">
+      <a href="https://support.flexischools.com.au/?hsLang=en-au">
+       Flexischools Knowledge Base
+      </a>
+     </li>
+     <li class="hs-kb-breadcrumb_item">
+      <a data-anchor="parents" data-slug="/parents" href="https://support.flexischools.com.au/parents?hsLang=en-au">
+       Parents
+      </a>
+     </li>
+     <li class="hs-kb-breadcrumb_item">
+      <a data-anchor="parents#troubleshooting" data-slug="/parents/troubleshooting" href="https://support.flexischools.com.au/parents?hsLang=en-au#troubleshooting">
+       Troubleshooting
+      </a>
+     </li>
+    </ol>
+   </div>
+  </div>
+  <div class="hs-kb-content-wrapper--sidebar -sidebar-left">
+   <aside class="hs-kb-sidebar -sidebar-left">
+    <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_accordion-menu" style="">
+     <ul aria-label="Category menu" class="hs-kb-category_accordion_nav_list" role="menu">
+      <li class="hs-kb-category_accordion_nav_list_item hs-kb-category_accordion_nav_list_item--has-children hs-kb-category-accordion_link--active" role="presentation"  ="">
+       <input aria-label="Toggle subcategory menu" aria-owns="menu-parents-children-0" checked="" role="menuitemcheckbox" tabindex="0" type="checkbox"/>
+       <div class="hs-kb-anchor_toggle hs-kb-anchor_toggle--active">
+        <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#main-content" role="menuitem">
+         Parents
+        </a>
+        <div class="toggle_icon--arrow">
+        </div>
+       </div>
+       <ul class="hs-kb-category_accordion_nav_list" id="menu-parents-children-0" role="menu">
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#setup-information" role="menuitem">
+          Setup Information
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#manage-your-account" role="menuitem">
+          Manage Your Account
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#parent-features" role="menuitem">
+          Parent Features
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#ordering" role="menuitem">
+          Ordering
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#payments-billing" role="menuitem">
+          Payments &amp; Billing
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/parents?hsLang=en-au#refunds-cancellations" role="menuitem">
+          Refunds &amp; Cancellations
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link hs-kb-category-accordion_link--active" href="https://support.flexischools.com.au/parents?hsLang=en-au#troubleshooting" role="menuitem">
+          Troubleshooting
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="hs-kb-category_accordion_nav_list_item hs-kb-category_accordion_nav_list_item--has-children" role="presentation"  ="">
+       <input aria-label="Toggle subcategory menu" aria-owns="menu-school-&amp;-suppliers-children-1" role="menuitemcheckbox" tabindex="0" type="checkbox"/>
+       <div class="hs-kb-anchor_toggle">
+        <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#main-content" role="menuitem">
+         School &amp; Suppliers
+        </a>
+        <div class="toggle_icon--arrow">
+        </div>
+       </div>
+       <ul class="hs-kb-category_accordion_nav_list" id="menu-school-&amp;-suppliers-children-1" role="menu">
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#managing-your-service" role="menuitem">
+          Managing your Service
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#menus" role="menuitem">
+          Menus
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#class-lists" role="menuitem">
+          Class Lists
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#managing-orders" role="menuitem">
+          Managing Orders
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#cancellations-refunds" role="menuitem">
+          Cancellations &amp; Refunds
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#reports" role="menuitem">
+          Reports
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#flexipos" role="menuitem">
+          FlexiPOS
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#printers-labels" role="menuitem">
+          Printers &amp; Labels
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link hs-kb-category-accordion_link--active" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#troubleshooting" role="menuitem">
+          Troubleshooting
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#communications" role="menuitem">
+          Communications
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/school-suppliers?hsLang=en-au#green-chair-panel" role="menuitem">
+          Green Chair Panel
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="hs-kb-category_accordion_nav_list_item hs-kb-category_accordion_nav_list_item--has-children" role="presentation"  ="">
+       <input aria-label="Toggle subcategory menu" aria-owns="menu-cdfpay-school-fees-children-2" role="menuitemcheckbox" tabindex="0" type="checkbox"/>
+       <div class="hs-kb-anchor_toggle">
+        <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#main-content" role="menuitem">
+         CDFpay School Fees
+        </a>
+        <div class="toggle_icon--arrow">
+        </div>
+       </div>
+       <ul class="hs-kb-category_accordion_nav_list" id="menu-cdfpay-school-fees-children-2" role="menu">
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#cdfpay-school-fees" role="menuitem">
+          CDFpay School Fees
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#payment-methods" role="menuitem">
+          Payment methods
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#make-payments" role="menuitem">
+          Make payments
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#edit-cancel-payments" role="menuitem">
+          Edit/cancel payments
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#payment-processing" role="menuitem">
+          Payment processing
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#payment-history" role="menuitem">
+          Payment history
+         </a>
+        </li>
+        <li class="hs-kb-category_accordion_nav_list_item" role="presentation">
+         <a class="hs-kb-category-accordion_link" href="https://support.flexischools.com.au/cdfpay-school-fees?hsLang=en-au#notifications" role="menuitem">
+          Notifications
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </div>
+   </aside>
+   <div class="hs-kb-content -sidebar-left">
+    <div id="hs_focus_mode">
+     <article class="knowledgebase-post">
+      <div class="container-fluid article-wrapper">
+       <div class="row-fluid-wrapper">
+        <div class="row-fluid">
+         <div class="span12 widget-span widget-type-cell" data-w="12" data-widget-type="cell" data-x="0" style="">
+          <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd-section kb-article-row-0-padding">
+           <div class="row-fluid">
+            <div class="span12 widget-span widget-type-cell dnd-column" data-w="12" data-widget-type="cell" data-x="0" style="">
+             <div class="row-fluid-wrapper row-depth-1 row-number-2 dnd-row">
+              <div class="row-fluid">
+               <div class="span12 widget-span widget-type-custom_widget dnd-module" data-w="12" data-widget-type="custom_widget" data-x="0" style="">
+                <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_kb-article-module-2" style="">
+                </div>
+               </div>
+               <!--end widget-span -->
+              </div>
+              <!--end row-->
+             </div>
+             <!--end row-wrapper -->
+             <div class="row-fluid-wrapper row-depth-1 row-number-3 dnd-row">
+              <div class="row-fluid">
+               <div class="span12 widget-span widget-type-custom_widget dnd-module" data-w="12" data-widget-type="custom_widget" data-x="0" style="">
+                <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_kb-article-module-3" style="">
+                 <h1 class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_inline_text_field" data-hs-cos-general-type="widget" data-hs-cos-type="inline_text_field" id="hs_cos_wrapper_kb-article-module-3_" style="">
+                  I'm receiving an error: "We are not able to log you in at this time. This is likely due to system maintenance". What do I do?
+                 </h1>
+                </div>
+               </div>
+               <!--end widget-span -->
+              </div>
+              <!--end row-->
+             </div>
+             <!--end row-wrapper -->
+             <div class="row-fluid-wrapper row-depth-1 row-number-4 dnd-row">
+              <div class="row-fluid">
+               <div class="span12 widget-span widget-type-custom_widget dnd-module" data-w="12" data-widget-type="custom_widget" data-x="0" style="">
+                <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_kb-article-module-4" style="">
+                 <h2 class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_inline_text_field" data-hs-cos-general-type="widget" data-hs-cos-type="inline_text_field" id="hs_cos_wrapper_kb-article-module-4_" style="">
+                  If you are receiving the above error message when logging in, we recommend that you clear your cache.
+                 </h2>
+                </div>
+               </div>
+               <!--end widget-span -->
+              </div>
+              <!--end row-->
+             </div>
+             <!--end row-wrapper -->
+             <div class="row-fluid-wrapper row-depth-1 row-number-5 dnd-row">
+              <div class="row-fluid">
+               <div class="span12 widget-span widget-type-custom_widget dnd-module" data-w="12" data-widget-type="custom_widget" data-x="0" style="">
+                <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_kb-article-module-5" style="">
+                 <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_inline_richtext_field" data-hs-cos-general-type="widget" data-hs-cos-type="inline_richtext_field" id="hs_cos_wrapper_kb-article-module-5_" style="">
+                  <p>
+                   Below are instructions on how to do this, based on the browser you're using. One you have completed this step, be sure to try logging in again.
+                  </p>
+                  <h3>
+                   Google Chrome
+                  </h3>
+                  <ol>
+                   <li>
+                    Open Chrome.
+                   </li>
+                   <li>
+                    Click on the three dots (⋮) in the top-right corner.
+                   </li>
+                   <li>
+                    Select "Settings".
+                   </li>
+                   <li>
+                    Go to "Privacy and security" → Click "Clear browsing data".
+                   </li>
+                   <li>
+                    Select so that there is a white check mark against both of the following selections: "Cookies and other site data" &amp; "Cached images and files"
+                   </li>
+                   <li>
+                    Click "Clear data".
+                   </li>
+                  </ol>
+                  <h3>
+                   Microsoft Edge
+                  </h3>
+                  <ol>
+                   <li>
+                    Open Edge.
+                   </li>
+                   <li>
+                    Click on the three dots (⋮) in the top-right corner.
+                   </li>
+                   <li>
+                    Select "Settings" → Go to "Privacy, search, and services".
+                   </li>
+                   <li>
+                    Under "Clear browsing data", click "Choose what to clear".
+                   </li>
+                   <li>
+                    Select so that there is a white check mark against both of the following selections: "Cookies and other site data" &amp; "Cached images and files"
+                   </li>
+                   <li>
+                    Click "Clear now".Open Chrome.
+                   </li>
+                  </ol>
+                  <h3>
+                   Mozilla Firefox
+                  </h3>
+                  <ol>
+                   <li>
+                    Open Firefox.
+                   </li>
+                   <li>
+                    Click on the three lines (≡) in the top-right corner.
+                   </li>
+                   <li>
+                    Select "Settings" → Go to "Privacy &amp; Security".
+                   </li>
+                   <li>
+                    Scroll to "Cookies and Site Data" → Click "Clear Data".
+                   </li>
+                   <li>
+                    Select so that there is a white check mark against both of the following selections: "Cookies and Site Data" &amp; "Cached Web Content"
+                   </li>
+                   <li>
+                    Click "Clear".
+                   </li>
+                  </ol>
+                  <h3>
+                   MacOS Safari
+                  </h3>
+                  <ol>
+                   <li>
+                    Open Safari
+                   </li>
+                   <li>
+                    Select Safari &gt; Settings &gt; Privacy
+                   </li>
+                   <li>
+                    Click Manage Website Data
+                   </li>
+                   <li>
+                    Select the websites you want to remove data from
+                   </li>
+                   <li>
+                    Click Remove or Remove All
+                   </li>
+                  </ol>
+                  <h3>
+                   Microsoft Internet Explorer
+                  </h3>
+                  <p>
+                   Since Internet Explorer is outdated and no longer supported by Microsoft, consider switching to a modern browser like Edge or Chrome for better security and performance.
+                  </p>
+                  <ol>
+                   <li>
+                    Open Internet Explorer.
+                   </li>
+                   <li>
+                    Press Ctrl + Shift + Delete to open the "Delete Browsing History" window.
+                   </li>
+                   <li>
+                    Ch
+                    <span style="background-color: transparent;">
+                     e
+                    </span>
+                    <span style="background-color: transparent;">
+                     ck Temporary Internet files and website files.
+                    </span>
+                   </li>
+                   <li>
+                    <span style="background-color: transparent;">
+                    </span>
+                    Click Delete.
+                   </li>
+                  </ol>
+                 </div>
+                </div>
+               </div>
+               <!--end widget-span -->
+              </div>
+              <!--end row-->
+             </div>
+             <!--end row-wrapper -->
+            </div>
+            <!--end widget-span -->
+           </div>
+           <!--end row-->
+          </div>
+          <!--end row-wrapper -->
+         </div>
+         <!--end widget-span -->
+        </div>
+       </div>
+      </div>
+     </article>
+    </div>
+    <div class="hs-kb-feedback">
+     <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_feedback" style="">
+      <div analytics-page-id="225336745446" article-id="244850393543" article-language-tag="en-au" enviro="prod" feedback-hubapi-domain="feedback-ap1.hubapi.com" id="ka-feedback-form-container" js-feedback-domain="js-ap1.hubspotfeedback.com" knowledge-base-id="225351628280" portal-id="441822066" ungated-for-multi-language="true">
+       <div id="ka-feedback-form">
+       </div>
+       <script src="https://js-ap1.hubspotfeedback.com/feedbackknowledge.js" type="text/javascript">
+       </script>
+      </div>
+     </div>
+    </div>
+    <div class="hs-kb-related-articles">
+     <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" data-hs-cos-general-type="widget" data-hs-cos-type="module" id="hs_cos_wrapper_related-articles" style="">
+      <div article-id="244850393543" article-language="en-au" enviro="prod" heading="Related articles" id="kb-related-articles-container" knowledge-base-id="225351628280" knowledge-base-type="SCP" portal-id="441822066" public-hubapi-domain="public-ap1.hubapi.com">
+       <div id="kb-related-articles">
+       </div>
+       <link href="https://js-ap1.hubspotfeedback.com/relatedarticles.css" rel="stylesheet"/>
+       <script src="https://js-ap1.hubspotfeedback.com/relatedarticles.js" type="text/javascript">
+       </script>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</main>

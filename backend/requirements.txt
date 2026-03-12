@@ -6,3 +6,5 @@ beautifulsoup4
 requests
 pydantic
 python-multipart
+markdownify
+six

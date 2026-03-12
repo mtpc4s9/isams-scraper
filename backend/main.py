@@ -9,6 +9,7 @@ from scraper_service import scraper_service
 from scrapers.odoo_scraper import scrape_odoo
 from scrapers.prompting_guide_scraper import scrape_prompting_guide
 from scrapers.isams_developer_scraper import scrape_isams_developer
+from scrapers.flexischools_scraper import scrape_flexischools_category
 from scrapers.toddle_scraper import scrape_toddle
 
 app = FastAPI(title="iSAMS Documentation Scraper")
@@ -102,6 +103,17 @@ def api_scrape_toddle(request: PublicScrapeRequest):
         driver = auth_service.get_driver()
         articles_list, markdown = scrape_toddle(request.url, driver)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Toddle Documentation")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-flexischools", response_model=PublicScrapeResponse)
+def api_scrape_flexischools(request: PublicScrapeRequest):
+    try:
+        # Note: Scrape might take some time as it crawls sequentially
+        markdown = scrape_flexischools_category(request.url)
+        if markdown.startswith("Error") or markdown.startswith("No sections"):
+            return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Flexischools docs")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

@@ -57,3 +57,8 @@ export const scrapeToddle = async (url: string) => {
     const response = await api.post('/scrape-toddle', { url });
     return response.data;
 };
+
+export const scrapeFlexischools = async (url: string) => {
+    const response = await api.post('/scrape-flexischools', { url });
+    return response.data;
+};
