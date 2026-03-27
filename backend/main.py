@@ -11,6 +11,7 @@ from scrapers.prompting_guide_scraper import scrape_prompting_guide
 from scrapers.isams_developer_scraper import scrape_isams_developer
 from scrapers.flexischools_scraper import scrape_flexischools_category
 from scrapers.toddle_scraper import scrape_toddle
+from scrapers.powerschool_scraper import scrape_powerschool
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -32,6 +33,8 @@ app.add_middleware(
 
 class PublicScrapeRequest(BaseModel):
     url: str
+    role: Optional[str] = "Admin"
+    headless: Optional[bool] = True
 
 class PublicScrapeResponse(BaseModel):
     success: bool
@@ -118,5 +121,24 @@ def api_scrape_flexischools(request: PublicScrapeRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/scrape-powerschool", response_model=PublicScrapeResponse)
+def api_scrape_powerschool(request: PublicScrapeRequest):
+    try:
+        # Default to True but allow override if provided in query or future UI update
+        headless = request.headless if hasattr(request, 'headless') else True
+        driver = auth_service.get_driver(headless=headless)
+        if not driver:
+            return PublicScrapeResponse(success=False, markdown_content="", message="Failed to initialize browser (likely profile lock)")
+            
+        markdown = scrape_powerschool(request.url, request.role, driver)
+        if markdown.startswith("Error"):
+             return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped PowerSchool Docs")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8002, reload=False)
+    print("Starting server on http://localhost:8002")
+    uvicorn.run(app, host="0.0.0.0", port=8002)
+

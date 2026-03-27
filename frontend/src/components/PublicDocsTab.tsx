@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools } from '../api';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool'>('odoo');
     const [url, setUrl] = useState('');
+    const [role, setRole] = useState('');
     const [markdown, setMarkdown] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
+    const [headless, setHeadless] = useState(true);
 
     const handleScrape = async () => {
         setIsLoading(true);
@@ -29,7 +31,9 @@ const PublicDocsTab = () => {
                 ? await scrapeOdoo(url)
                 : activeTool === 'prompting'
                     ? await scrapePromptingGuide(url)
-                    : await scrapeFlexischools(url);
+                    : activeTool === 'powerschool'
+                        ? await scrapePowerschool(url, role, headless)
+                        : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -67,6 +71,13 @@ const PublicDocsTab = () => {
             icon: <BookOpen className="w-5 h-5 text-green-500" />,
             desc: 'Extract categories, articles & related links.',
             placeholder: 'https://support.flexischools.com.au/parents'
+        },
+        {
+            id: 'powerschool',
+            label: 'PowerSchool SIS',
+            icon: <Globe className="w-5 h-5 text-purple-500" />,
+            desc: 'Scrape PowerSchool hierarchical docs.',
+            placeholder: 'https://ps.powerschool-docs.com/pssis-admin/latest/get-started'
         }
     ];
 
@@ -142,6 +153,42 @@ const PublicDocsTab = () => {
                                 onChange={(e) => setUrl(e.target.value)}
                                 className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
                             />
+                        </div>
+
+                        {activeTool === 'powerschool' && (
+                            <div className="relative group">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                                    <Terminal className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Role (e.g. PS SIS Admin)"
+                                    value={role}
+                                    onChange={(e) => setRole(e.target.value)}
+                                    className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                                />
+                            </div>
+                        )}
+
+                        <div className="flex items-center justify-between p-4 bg-secondary/5 rounded-2xl border border-border/50">
+                            <div className="flex items-center gap-3">
+                                <div className={cn("p-2 rounded-lg", headless ? "bg-secondary/10" : "bg-green-500/10")}>
+                                    <Globe className={cn("w-4 h-4", headless ? "text-secondary" : "text-green-500")} />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-wider">Browser Visibility</p>
+                                    <p className="text-[10px] text-secondary font-medium">{headless ? "Background (Headless) Mode" : "Visible Browser (Window) Mode"}</p>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => setHeadless(!headless)}
+                                className={cn(
+                                    "px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
+                                    headless ? "bg-secondary/10 text-secondary hover:bg-secondary/20" : "bg-green-500/20 text-green-500 hover:bg-green-500/30"
+                                )}
+                            >
+                                {headless ? "Show Browser" : "Hide Browser"}
+                            </button>
                         </div>
 
                         <div className="flex items-center justify-between gap-4">

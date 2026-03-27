@@ -62,3 +62,10 @@ export const scrapeFlexischools = async (url: string) => {
     const response = await api.post('/scrape-flexischools', { url });
     return response.data;
 };
+
+export const scrapePowerschool = async (url: string, role: string, headless: boolean = true) => {
+    const response = await api.post('/scrape-powerschool', { url, role, headless });
+    return response.data;
+};
+
+

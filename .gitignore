@@ -1,3 +1,14 @@
 node_modules/
 __pycache__/
 .env
+chrome_profile/
+venv/
+*.html
+*.md
+!README.md
+!TODDLE_SCRAPER_GUIDE.md
+debug_*.py
+repro_*.py
+.idea/
+.vscode/
+.DS_Store

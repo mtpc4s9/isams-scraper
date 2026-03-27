@@ -18,7 +18,7 @@ class AuthService:
         self.project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.user_data_dir = os.path.join(self.project_dir, 'chrome_profile')
 
-    def get_driver(self, interactive=False):
+    def get_driver(self, interactive=False, headless=True):
         # Check if existing driver is still alive
         if self.driver:
             try:
@@ -33,15 +33,45 @@ class AuthService:
         options.add_argument(f"--user-data-dir={self.user_data_dir}")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("--disable-software-rasterizer")
+        
+        # Fixing "crashed" error on some Windows setups
+        options.add_argument("--window-size=1920,1080")
         
         if interactive:
             options.add_experimental_option("detach", True)
-        else:
-            # options.add_argument("--headless") # Headless would lose the session if not careful
-            pass
+        elif headless:
+            options.add_argument("--headless=new")
+        
+        # Disable logging that clutters console
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
             
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        return self.driver
+        try:
+            service = Service(ChromeDriverManager().install())
+            self.driver = webdriver.Chrome(service=service, options=options)
+            return self.driver
+        except Exception as e:
+            logger.error(f"WebDriver Initialization Failed: {e}")
+            if "user data directory is already in use" in str(e):
+                logger.error("CRITICAL: Chrome profile is locked. Please close other Chrome instances or use a different profile.")
+                return None
+            
+            # Fallback: Try without user profile if it's a lock issue
+            logger.info("Retrying without persistent profile...")
+            options = Options()
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-gpu")
+            if not interactive and headless:
+                options.add_argument("--headless=new")
+            
+            try:
+                self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+                return self.driver
+            except Exception as e2:
+                logger.error(f"Fallback WebDriver Failed: {e2}")
+                return None
 
     def launch_login(self, target_url="https://support.toddleapp.com/"):
         """Launch a persistent browser window for the user to log in."""
