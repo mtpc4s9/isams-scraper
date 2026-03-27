@@ -47,12 +47,15 @@ def scrape_powerschool_article(driver, url, role_name, category_1, category_2, a
     
     content_md = ""
     if main_content:
+        # Clean up unwanted tags (remove them and their content completely)
+        for tag in main_content.find_all(['script', 'style', 'noscript', 'nav', 'aside', 'footer', 'header']):
+            tag.decompose()
+
         # Use markdownify for a much cleaner, flow-based conversion
         content_md = md_converter(
             str(main_content),
             heading_style="ATX",
             newline_style="MD", # Ensure consistent line breaks
-            strip=['script', 'style', 'nav', 'aside', 'footer', 'header']
         ).strip()
 
         # Heuristic for "Agenda" pages: if the content is mostly links, strip the link syntax
