@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { scrape, scrapeIsamsDeveloper, scrapeToddle } from '../api';
-import { Search, Loader2, FileText, CheckCircle, AlertCircle, Globe } from 'lucide-react';
+import { scrape, scrapeIsamsDeveloper, scrapeToddle, scrapeClasslink } from '../api';
+import { Search, Loader2, FileText, CheckCircle, AlertCircle, Globe, Tag } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ScraperToolProps {
     onScrapeSuccess: (markdown: string, articles: any[]) => void;
-    scraperType?: 'isams' | 'isams-developer' | 'toddle';
+    scraperType?: 'isams' | 'isams-developer' | 'toddle' | 'classlink';
 }
 
 const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType = 'isams' }) => {
     const [url, setUrl] = useState('');
+    const [topic, setTopic] = useState('');
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState('');
 
@@ -37,7 +38,9 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
                 ? await scrape(url)
                 : scraperType === 'isams-developer'
                     ? await scrapeIsamsDeveloper(url)
-                    : await scrapeToddle(url);
+                    : scraperType === 'classlink'
+                        ? await scrapeClasslink(url, topic)
+                        : await scrapeToddle(url);
 
             clearInterval(timer);
 
@@ -73,13 +76,33 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
                     </div>
                     <input
                         type="url"
-                        placeholder={scraperType === 'toddle' ? 'Paste Toddle Collection URL (e.g., https://support.toddleapp.com/en/collections/...)' : 'Paste iSAMS Documentation URL here...'}
+                        placeholder={
+                            scraperType === 'toddle' ? 'Paste Toddle Collection URL (e.g., https://support.toddleapp.com/en/collections/...)' : 
+                            scraperType === 'classlink' ? 'Paste ClassLink Applet or Topic URL here (e.g., https://help.classlink.com/s/launchpad-home)' :
+                            'Paste iSAMS Documentation URL here...'
+                        }
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
                         required
                     />
                 </div>
+
+                {scraperType === 'classlink' && (
+                    <div className="relative group">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                            <Tag className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Topic Category Name (e.g., Launchpad Documentation, FAQs - Profile Settings)"
+                            value={topic}
+                            onChange={(e) => setTopic(e.target.value)}
+                            className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                            required
+                        />
+                    </div>
+                )}
 
                 <div className="flex items-center justify-between gap-4 pt-2">
                     <div className="flex-1">

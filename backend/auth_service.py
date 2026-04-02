@@ -45,8 +45,10 @@ class AuthService:
         elif headless:
             options.add_argument("--headless=new")
         
-        # Disable logging that clutters console
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # Disable logging that clutters console and avoid Google SSO blocks
+        options.add_experimental_option('excludeSwitches', ['enable-logging', 'enable-automation'])
+        options.add_experimental_option('useAutomationExtension', False)
+        options.add_argument('--disable-blink-features=AutomationControlled')
             
         try:
             service = Service(ChromeDriverManager().install())

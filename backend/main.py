@@ -35,6 +35,7 @@ class PublicScrapeRequest(BaseModel):
     url: str
     role: Optional[str] = "Admin"
     headless: Optional[bool] = True
+    topic: Optional[str] = "General"
 
 class PublicScrapeResponse(BaseModel):
     success: bool
@@ -134,6 +135,19 @@ def api_scrape_powerschool(request: PublicScrapeRequest):
         if markdown.startswith("Error"):
              return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped PowerSchool Docs")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/scrape-classlink", response_model=PublicScrapeResponse)
+def api_scrape_classlink(request: PublicScrapeRequest):
+    try:
+        from scrapers.classlink_scraper import scrape_classlink
+        driver = auth_service.get_driver()
+        if not driver:
+            return PublicScrapeResponse(success=False, markdown_content="", message="Browser not initialized.")
+        articles_list, markdown = scrape_classlink(request.url, request.topic, driver)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped ClassLink Documentation")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

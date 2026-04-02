@@ -68,4 +68,7 @@ export const scrapePowerschool = async (url: string, role: string, headless: boo
     return response.data;
 };
 
-
+export const scrapeClasslink = async (url: string, topic: string) => {
+    const response = await api.post('/scrape-classlink', { url, topic });
+    return response.data;
+};
