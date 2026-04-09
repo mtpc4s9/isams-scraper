@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const LoginRequiredTab = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [markdown, setMarkdown] = useState('');
-    const [activeSubTab, setActiveSubTab] = useState<'user' | 'developer' | 'toddle' | 'classlink'>('user');
+    const [activeSubTab, setActiveSubTab] = useState<'user' | 'developer' | 'toddle' | 'classlink' | 'jamf'>('user');
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
@@ -23,7 +23,8 @@ const LoginRequiredTab = () => {
         { id: 'user', label: 'User Documents', icon: <User className="w-4 h-4" /> },
         { id: 'developer', label: 'Developer Documents', icon: <Code className="w-4 h-4" /> },
         { id: 'toddle', label: 'Toddle Support', icon: <GraduationCap className="w-4 h-4" /> },
-        { id: 'classlink', label: 'ClassLink Support', icon: <GraduationCap className="w-4 h-4" /> }
+        { id: 'classlink', label: 'ClassLink Support', icon: <GraduationCap className="w-4 h-4" /> },
+        { id: 'jamf', label: 'Jamf Support', icon: <GraduationCap className="w-4 h-4" /> }
     ];
 
     return (
@@ -73,7 +74,7 @@ const LoginRequiredTab = () => {
                             <div className="md:col-span-3">
                                 <ScraperTool
                                     onScrapeSuccess={handleScrapeSuccess}
-                                    scraperType={activeSubTab === 'user' ? 'isams' : activeSubTab === 'developer' ? 'isams-developer' : activeSubTab === 'classlink' ? 'classlink' : 'toddle'}
+                                    scraperType={activeSubTab === 'user' ? 'isams' : activeSubTab === 'developer' ? 'isams-developer' : activeSubTab === 'classlink' ? 'classlink' : activeSubTab === 'jamf' ? 'jamf' : 'toddle'}
                                 />
                             </div>
                         </div>

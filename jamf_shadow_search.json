@@ -1,0 +1,134 @@
+[
+  {
+    "path": "DOCUMENT > HTML > HEAD > TITLE",
+    "text": "Google Secure LDAP Integration \u2022 Jamf Pro Documentation 11.26.0 \u2022 Jamf Learning Hub"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > FT-RESIZABLE-CONTAINER > FT-READER-TOC(shadowRoot) > DIV > DIV > DIV > DIV > DIV > FT-READER-INTERNAL-LINK > FT-TYPOGRAPHY",
+    "text": "LDAP Directory Service Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > FT-RESIZABLE-CONTAINER > FT-READER-TOC(shadowRoot) > DIV > DIV > DIV > DIV > DIV > DIV > DIV > FT-READER-INTERNAL-LINK > FT-TYPOGRAPHY",
+    "text": "Google Secure LDAP Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > FT-READER-BREADCRUMBS(shadowRoot) > NAV > OL > LI > FT-TYPOGRAPHY",
+    "text": "Google Secure LDAP Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > FT-SLOTTED-MODAL > FT-SLOTTED-MODAL-CONTENT > DIV > FT-READER-TOC(shadowRoot) > DIV > DIV > DIV > DIV > DIV > FT-READER-INTERNAL-LINK > FT-TYPOGRAPHY",
+    "text": "LDAP Directory Service Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > FT-SLOTTED-MODAL > FT-SLOTTED-MODAL-CONTENT > DIV > FT-READER-TOC(shadowRoot) > DIV > DIV > DIV > DIV > DIV > DIV > DIV > FT-READER-INTERNAL-LINK > FT-TYPOGRAPHY",
+    "text": "Google Secure LDAP Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-TOPIC-TEMPLATE-CUSTOM-COMPONENT(shadowRoot) > DIV > DIV > H3",
+    "text": "Google Secure LDAP Integration"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > FT-READER-TOPIC-CONDITIONAL-VISIBILITY > DIV > DIV > DIV > DIV > FT-READER-TOPIC-ACTION(shadowRoot) > FT-TOOLTIP(shadowRoot) > DIV > DIV > DIV > FT-TYPOGRAPHY",
+    "text": "Add bookmark \"Google Secure LDAP Integration\""
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P",
+    "text": "with Google's Secure LDAP, consider the following:"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "allows you to integrate with Google's secure LDAP service that is a part of G Suite Enterprise and C"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "LDAP accounts."
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > DIV > P",
+    "text": "logs. For information on Secure LDAP service error codes, see the following documentation from Googl"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "Google's secure LDAP service requires a different configuration than standard LDAP servers. For inst"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "as an LDAP client to the secure LDAP service, configure access permissions, and download the generat"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "as an LDAP client, you need to generate the"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > SECTION > OL > LI > SPAN",
+    "text": "tab to specify object class and search base data, and map attributes. When configuring the search ba"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > SECTION > P",
+    "text": "in your Google Admin console, and check the LDAP audit log."
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-TOPIC-TEMPLATE-CUSTOM-COMPONENT(shadowRoot) > DIV > DIV > H4",
+    "text": "Default Attribute Mappings for Google Secure LDAP"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > FT-READER-TOPIC-CONDITIONAL-VISIBILITY > DIV > DIV > DIV > DIV > FT-READER-TOPIC-ACTION(shadowRoot) > FT-TOOLTIP(shadowRoot) > DIV > DIV > DIV > FT-TYPOGRAPHY",
+    "text": "Add bookmark \"Default Attribute Mappings for Google Secure LDAP\""
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P",
+    "text": "For more information on the Secure LDAP schema, see the following documentation from Google:"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P > A",
+    "text": "Secure LDAP schema"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > FT-READER-PAGE-CONDITIONAL-VISIBILITY > DIV > FT-READER-TOC(shadowRoot) > DIV > DIV > DIV > FT-READER-INTERNAL-LINK > FT-TYPOGRAPHY",
+    "text": "Default Attribute Mappings for Google Secure LDAP"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P",
+    "text": "with Google's Secure LDAP, consider the following:"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "allows you to integrate with Google's secure LDAP service that is a part of G Suite Enterprise and C"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "LDAP accounts."
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > DIV > P",
+    "text": "logs. For information on Secure LDAP service error codes, see the following documentation from Googl"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "Google's secure LDAP service requires a different configuration than standard LDAP servers. For inst"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "as an LDAP client to the secure LDAP service, configure access permissions, and download the generat"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > UL > LI > P",
+    "text": "as an LDAP client, you need to generate the"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > SECTION > OL > LI > SPAN",
+    "text": "tab to specify object class and search base data, and map attributes. When configuring the search ba"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > SECTION > P",
+    "text": "in your Google Admin console, and check the LDAP audit log."
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P",
+    "text": "For more information on the Secure LDAP schema, see the following documentation from Google:"
+  },
+  {
+    "path": "DOCUMENT > HTML > BODY > DIV > DIV > DIV > DIV > DIV > FT-INTERNAL-READER-CONTEXT > DIV(shadowRoot) > DIV > DIV > DIV > MAIN > DIV > DIV > DIV > DIV > FT-READER-CONTENT-WRAPPER(shadowRoot) > FT-READER-LINK-PREVIEW-WRAPPER > FT-READER-CONTENT(shadowRoot) > FT-INFINITE-SCROLL(shadowRoot) > DIV > DIV > FT-READER-TOPIC-CONTEXT > FT-READER-TOPIC-TEMPLATE-WRAPPER(shadowRoot) > FT-READER-TOPIC-CONTENT(shadowRoot) > SECTION > DIV > DIV > DIV > DIV > P > A",
+    "text": "Secure LDAP schema"
+  }
+]

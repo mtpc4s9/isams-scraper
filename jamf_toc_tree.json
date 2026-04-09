@@ -1,0 +1,173 @@
+{
+  "activePath": [],
+  "tocTree": [
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Jamf_Pro_Documentation",
+      "isActive": false,
+      "slug": "Jamf_Pro_Documentation",
+      "title": "Jamf Pro Documentation"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Overview_of_Technologies",
+      "isActive": false,
+      "slug": "Overview_of_Technologies",
+      "title": "Overview of Technologies"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Applications_and_Utilities",
+      "isActive": false,
+      "slug": "Applications_and_Utilities",
+      "title": "Applications and Utilities"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Security",
+      "isActive": false,
+      "slug": "Security",
+      "title": "Security"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Components_Installed_on_Managed_Computers",
+      "isActive": false,
+      "slug": "Components_Installed_on_Managed_Computers",
+      "title": "Components Installed on Managed Computers"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Components_Installed_on_Mobile_Devices",
+      "isActive": false,
+      "slug": "Components_Installed_on_Mobile_Devices",
+      "title": "Components Installed on Mobile Devices"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Jamf_Platform_Services_and_Capabilities",
+      "isActive": false,
+      "slug": "Jamf_Platform_Services_and_Capabilities",
+      "title": "Jamf Platform Services and Capabilities"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Before_You_Begin",
+      "isActive": false,
+      "slug": "Before_You_Begin",
+      "title": "Before You Begin"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/System_Settings",
+      "isActive": false,
+      "slug": "System_Settings",
+      "title": "System Settings"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Global_Management_Settings",
+      "isActive": false,
+      "slug": "Global_Management_Settings",
+      "title": "Global Management Settings"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Jamf_Application_Integrations",
+      "isActive": false,
+      "slug": "Jamf_Application_Integrations",
+      "title": "Jamf Application Integrations"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Jamf_Self_Service",
+      "isActive": false,
+      "slug": "Jamf_Self_Service",
+      "title": "Jamf Self Service"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Server_Infrastructure",
+      "isActive": false,
+      "slug": "Server_Infrastructure",
+      "title": "Server Infrastructure"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Network_Organization",
+      "isActive": false,
+      "slug": "Network_Organization",
+      "title": "Network Organization"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Enrollment_into_Jamf_MDM",
+      "isActive": false,
+      "slug": "Enrollment_into_Jamf_MDM",
+      "title": "Enrollment"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Declarative_Device_Management",
+      "isActive": false,
+      "slug": "Declarative_Device_Management",
+      "title": "Declarative Device Management"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Managing_Computers",
+      "isActive": false,
+      "slug": "Managing_Computers",
+      "title": "Managing Computers"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Managing_Mobile_Devices",
+      "isActive": false,
+      "slug": "Managing_Mobile_Devices",
+      "title": "Managing Mobile Devices"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Managing_Users",
+      "isActive": false,
+      "slug": "Managing_Users",
+      "title": "Managing Users"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Group_Management",
+      "isActive": false,
+      "slug": "Group_Management",
+      "title": "Group Management"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Managing_Apple_OS_Updates",
+      "isActive": false,
+      "slug": "Managing_Apple_OS_Updates",
+      "title": "Managing Apple OS Updates"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Content_Distribution",
+      "isActive": false,
+      "slug": "Content_Distribution",
+      "title": "Content Distribution"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Classroom_Management",
+      "isActive": false,
+      "slug": "Classroom_Management",
+      "title": "Classroom Management"
+    },
+    {
+      "depth": 0,
+      "href": "https://learn.jamf.com/r/en-US/jamf-pro-documentation-current/Copyright",
+      "isActive": false,
+      "slug": "Copyright",
+      "title": "Copyright and Trademarks"
+    }
+  ]
+}

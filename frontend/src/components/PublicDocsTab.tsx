@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool } from '../api';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice'>('odoo');
     const [url, setUrl] = useState('');
     const [role, setRole] = useState('');
+    const [topic, setTopic] = useState('');
     const [markdown, setMarkdown] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
@@ -33,7 +34,9 @@ const PublicDocsTab = () => {
                     ? await scrapePromptingGuide(url)
                     : activeTool === 'powerschool'
                         ? await scrapePowerschool(url, role, headless)
-                        : await scrapeFlexischools(url);
+                        : activeTool === 'freshservice'
+                            ? await scrapeFreshservice(url, topic)
+                            : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -78,6 +81,13 @@ const PublicDocsTab = () => {
             icon: <Globe className="w-5 h-5 text-purple-500" />,
             desc: 'Scrape PowerSchool hierarchical docs.',
             placeholder: 'https://ps.powerschool-docs.com/pssis-admin/latest/get-started'
+        },
+        {
+            id: 'freshservice',
+            label: 'FreshService Docs',
+            icon: <BookOpen className="w-5 h-5 text-indigo-500" />,
+            desc: 'Extract sub-topic & articles via URLs.',
+            placeholder: 'https://support.freshservice.com/support/solutions/folders/X'
         }
     ];
 
@@ -102,7 +112,7 @@ const PublicDocsTab = () => {
                         return (
                             <button
                                 key={tool.id}
-                                onClick={() => { setActiveTool(tool.id as any); setUrl(''); setMarkdown(''); setStatus(''); }}
+                                onClick={() => { setActiveTool(tool.id as any); setUrl(''); setMarkdown(''); setStatus(''); setTopic(''); setRole(''); }}
                                 className={cn(
                                     "w-full bento-item text-left transition-all duration-300 group relative overflow-hidden",
                                     isActive ? "ring-2 ring-primary border-primary bg-primary/5 shadow-xl shadow-primary/10" : "hover:border-primary/30"
@@ -165,6 +175,21 @@ const PublicDocsTab = () => {
                                     placeholder="Enter Role (e.g. PS SIS Admin)"
                                     value={role}
                                     onChange={(e) => setRole(e.target.value)}
+                                    className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                                />
+                            </div>
+                        )}
+
+                        {activeTool === 'freshservice' && (
+                            <div className="relative group">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                                    <FileText className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Main Topic (e.g., IT Operations)"
+                                    value={topic}
+                                    onChange={(e) => setTopic(e.target.value)}
                                     className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
                                 />
                             </div>

@@ -12,6 +12,7 @@ from scrapers.isams_developer_scraper import scrape_isams_developer
 from scrapers.flexischools_scraper import scrape_flexischools_category
 from scrapers.toddle_scraper import scrape_toddle
 from scrapers.powerschool_scraper import scrape_powerschool
+from scrapers.freshservice_scraper import scrape_freshservice
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -139,6 +140,17 @@ def api_scrape_powerschool(request: PublicScrapeRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/scrape-freshservice", response_model=PublicScrapeResponse)
+def api_scrape_freshservice(request: PublicScrapeRequest):
+    try:
+        markdown = scrape_freshservice(request.url, request.topic)
+        if markdown.startswith("Error"):
+             return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped FreshService Docs")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/scrape-classlink", response_model=PublicScrapeResponse)
 def api_scrape_classlink(request: PublicScrapeRequest):
     try:
@@ -148,6 +160,23 @@ def api_scrape_classlink(request: PublicScrapeRequest):
             return PublicScrapeResponse(success=False, markdown_content="", message="Browser not initialized.")
         articles_list, markdown = scrape_classlink(request.url, request.topic, driver)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped ClassLink Documentation")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/scrape-jamf", response_model=PublicScrapeResponse)
+def api_scrape_jamf(request: PublicScrapeRequest):
+    try:
+        from scrapers.jamf_scraper import JamfScraper
+        scraper = JamfScraper(auth_service)
+        # Use scrape_category: auto-detects children from TOC tree.
+        # Falls back to single article if the node is a leaf.
+        success, message, result = scraper.scrape_category(request.url)
+        if not success:
+            return PublicScrapeResponse(success=False, markdown_content="", message=message)
+        
+        md_content = f"---\nProduct: {result['product']}\nGroup: {result['group']}\nArticle Name: {result['article_name']}\nArticle Link: {result['article_link']}\n---\n\n{result['content']}"
+        return PublicScrapeResponse(success=True, markdown_content=md_content, message=message)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

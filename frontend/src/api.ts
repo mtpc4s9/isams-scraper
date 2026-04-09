@@ -72,3 +72,13 @@ export const scrapeClasslink = async (url: string, topic: string) => {
     const response = await api.post('/scrape-classlink', { url, topic });
     return response.data;
 };
+
+export const scrapeFreshservice = async (url: string, topic: string) => {
+    const response = await api.post('/scrape-freshservice', { url, topic });
+    return response.data;
+};
+
+export const scrapeJamf = async (url: string) => {
+    const response = await api.post('/scrape-jamf', { url });
+    return response.data;
+};

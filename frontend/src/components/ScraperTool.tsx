@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { scrape, scrapeIsamsDeveloper, scrapeToddle, scrapeClasslink } from '../api';
+import { scrape, scrapeIsamsDeveloper, scrapeToddle, scrapeClasslink, scrapeJamf } from '../api';
 import { Search, Loader2, FileText, CheckCircle, AlertCircle, Globe, Tag } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ScraperToolProps {
     onScrapeSuccess: (markdown: string, articles: any[]) => void;
-    scraperType?: 'isams' | 'isams-developer' | 'toddle' | 'classlink';
+    scraperType?: 'isams' | 'isams-developer' | 'toddle' | 'classlink' | 'jamf';
 }
 
 const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType = 'isams' }) => {
@@ -40,7 +40,9 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
                     ? await scrapeIsamsDeveloper(url)
                     : scraperType === 'classlink'
                         ? await scrapeClasslink(url, topic)
-                        : await scrapeToddle(url);
+                        : scraperType === 'jamf'
+                            ? await scrapeJamf(url)
+                            : await scrapeToddle(url);
 
             clearInterval(timer);
 
@@ -79,6 +81,7 @@ const ScraperTool: React.FC<ScraperToolProps> = ({ onScrapeSuccess, scraperType 
                         placeholder={
                             scraperType === 'toddle' ? 'Paste Toddle Collection URL (e.g., https://support.toddleapp.com/en/collections/...)' : 
                             scraperType === 'classlink' ? 'Paste ClassLink Applet or Topic URL here (e.g., https://help.classlink.com/s/launchpad-home)' :
+                            scraperType === 'jamf' ? 'Paste Jamf Learn Article URL here (e.g., https://learn.jamf.com/...)' :
                             'Paste iSAMS Documentation URL here...'
                         }
                         value={url}
