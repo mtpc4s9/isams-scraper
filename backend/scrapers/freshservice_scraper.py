@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import time
 from urllib.parse import urljoin
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -89,13 +90,17 @@ def scrape_freshservice(url: str, topic: str, driver=None) -> str:
                 article_title = "Unknown Article"
                 content_element = None
                 
-                # Fallback selectors cho title
-                title_h1 = art_soup.find('h1')
-                if title_h1:
-                    article_title = title_h1.text.strip()
-                elif art_soup.title:
-                    article_title = art_soup.title.text.split(" : ")[0].strip()
-                    
+                # Title extract
+                page_title_elem = art_soup.find(class_='page-title')
+                if page_title_elem:
+                    article_title = page_title_elem.text.strip()
+                else:
+                    title_h1 = art_soup.find('h1')
+                    if title_h1:
+                        article_title = title_h1.text.strip()
+                    elif art_soup.title:
+                        article_title = art_soup.title.text.split(" : ")[0].strip()
+                        
                 # Content selectors
                 # Bài viết trên FreshDesk thường nằm trong .article-main, .article-body, .article-content
                 article_body = art_soup.find(class_='article-main')
@@ -109,9 +114,25 @@ def scrape_freshservice(url: str, topic: str, driver=None) -> str:
                 else:
                     content_element = art_soup.find('body') # Thất bại lấy thẻ cha
                 
-                # Trích xuất Pure text
+                # Trích xuất Pure text xử lý inline tags tránh xuống dòng
                 if content_element:
-                    text_content = content_element.get_text(separator='\n', strip=True)
+                    for tag in content_element.find_all(['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+                        tag.insert_before('\n')
+                        tag.insert_after('\n')
+                    for tag in content_element.find_all('br'):
+                        tag.replace_with('\n')
+                    for tag in content_element.find_all('li'):
+                        tag.insert(0, '- ')
+                        tag.insert_before('\n')
+                        tag.insert_after('\n')
+                        
+                    raw_text = content_element.get_text(separator=' ')
+                    raw_text = raw_text.replace('\xa0', ' ')
+                    raw_text = re.sub(r'[ \t]+', ' ', raw_text)
+                    
+                    lines = [line.strip() for line in raw_text.split('\n')]
+                    lines = [line for line in lines if line]
+                    text_content = '\n'.join(lines)
                 else:
                     text_content = "Không thể tìm thấy nội dung văn bản cho bài viết này."
                 
