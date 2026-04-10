@@ -22,54 +22,59 @@ def scrape_freshservice(url: str, topic: str, driver=None) -> str:
         
         all_article_links = set()
         article_links_ordered = []
-        
-        current_url = url
         sub_topic = "Unknown Sub-topic"
         
-        print(f"Start scraping FreshService folder: {current_url}")
-        
-        # --- Lặp qua các trang (Pagination) ---
-        while current_url:
-            print(f"Scraping page: {current_url}")
-            response = session.get(current_url, timeout=15)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
+        if '/articles/' in url:
+            print(f"Detected single article URL. Scrape directly: {url}")
+            article_links_ordered.append(url)
+            # Default sub-topic name to the main topic since we don't have folder context
+            sub_topic = topic
+        else:
+            current_url = url
+            print(f"Start scraping FreshService folder: {current_url}")
             
-            # Lấy tên Sub-topic ở trang đầu tiên
-            if current_url == url:
-                title_tag = soup.title
-                if title_tag:
-                    # e.g., "New Gen Project Management : Freshservice Support"
-                    raw_title = title_tag.text.strip()
-                    sub_topic = raw_title.split(" : ")[0] if " : " in raw_title else raw_title
-            
-            # Lấy tất cả href có chứa '/support/solutions/articles/'
-            links = []
-            for a in soup.find_all('a', href=True):
-                href = a['href']
-                if '/support/solutions/articles/' in href and not href.endswith('#'):
-                    full_link = urljoin(current_url, href)
-                    links.append(full_link)
-            
-            # Bỏ link trùng lặp trên cùng trang
-            for link in links:
-                if link not in all_article_links:
-                    all_article_links.add(link)
-                    article_links_ordered.append(link)
-            
-            # Tìm link trang tiếp theo (Next)
-            next_link_tag = soup.find('a', string=lambda t: t and 'Next' in t)
-            if next_link_tag and next_link_tag.has_attr('href'):
-                # Kiểm tra nếu link không phải disabled
-                parent = next_link_tag.parent
-                if parent and 'disabled' in parent.get('class', []):
-                    current_url = None
-                else:
-                    current_url = urljoin(current_url, next_link_tag['href'])
-            else:
-                current_url = None # Không còn trang nào nữa
+            # --- Lặp qua các trang (Pagination) ---
+            while current_url:
+                print(f"Scraping page: {current_url}")
+                response = session.get(current_url, timeout=15)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, 'html.parser')
                 
-            time.sleep(1) # Tránh rate limit
+                # Lấy tên Sub-topic ở trang đầu tiên
+                if current_url == url:
+                    title_tag = soup.title
+                    if title_tag:
+                        # e.g., "New Gen Project Management : Freshservice Support"
+                        raw_title = title_tag.text.strip()
+                        sub_topic = raw_title.split(" : ")[0] if " : " in raw_title else raw_title
+                
+                # Lấy tất cả href có chứa '/support/solutions/articles/'
+                links = []
+                for a in soup.find_all('a', href=True):
+                    href = a['href']
+                    if '/support/solutions/articles/' in href and not href.endswith('#'):
+                        full_link = urljoin(current_url, href)
+                        links.append(full_link)
+                
+                # Bỏ link trùng lặp trên cùng trang
+                for link in links:
+                    if link not in all_article_links:
+                        all_article_links.add(link)
+                        article_links_ordered.append(link)
+                
+                # Tìm link trang tiếp theo (Next)
+                next_link_tag = soup.find('a', string=lambda t: t and 'Next' in t)
+                if next_link_tag and next_link_tag.has_attr('href'):
+                    # Kiểm tra nếu link không phải disabled
+                    parent = next_link_tag.parent
+                    if parent and 'disabled' in parent.get('class', []):
+                        current_url = None
+                    else:
+                        current_url = urljoin(current_url, next_link_tag['href'])
+                else:
+                    current_url = None # Không còn trang nào nữa
+                    
+                time.sleep(1) # Tránh rate limit
 
         if not article_links_ordered:
             return "Error: No articles found in the provided sub-topic URL."
@@ -114,25 +119,15 @@ def scrape_freshservice(url: str, topic: str, driver=None) -> str:
                 else:
                     content_element = art_soup.find('body') # Thất bại lấy thẻ cha
                 
-                # Trích xuất Pure text xử lý inline tags tránh xuống dòng
+                # Trích xuất dạng Markdown chuẩn (giúp giữ nguyên format bảng biểu và lists)
+                import markdownify
                 if content_element:
-                    for tag in content_element.find_all(['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
-                        tag.insert_before('\n')
-                        tag.insert_after('\n')
-                    for tag in content_element.find_all('br'):
-                        tag.replace_with('\n')
-                    for tag in content_element.find_all('li'):
-                        tag.insert(0, '- ')
-                        tag.insert_before('\n')
-                        tag.insert_after('\n')
-                        
-                    raw_text = content_element.get_text(separator=' ')
-                    raw_text = raw_text.replace('\xa0', ' ')
-                    raw_text = re.sub(r'[ \t]+', ' ', raw_text)
-                    
-                    lines = [line.strip() for line in raw_text.split('\n')]
-                    lines = [line for line in lines if line]
-                    text_content = '\n'.join(lines)
+                    text_content = markdownify.markdownify(
+                        str(content_element), 
+                        heading_style="ATX",
+                        escape_underscores=False,
+                        escape_asterisks=False
+                    ).strip()
                 else:
                     text_content = "Không thể tìm thấy nội dung văn bản cho bài viết này."
                 
