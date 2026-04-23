@@ -136,11 +136,11 @@ class ClassLinkScraper:
                     break
             
             try:
-                # Look for Load More button using the user-specified class
+                # Look for Load More button using the user-specified class or the known 'loadmore' class
                 buttons = self.driver.find_elements(By.XPATH, 
-                    "//button[contains(@class, 'slds-button') and ("
+                    "//button[contains(@class, 'loadmore') or (contains(@class, 'slds-button') and ("
                     "contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'load more') or "
-                    "contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'view more'))]"
+                    "contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'view more')))]"
                 )
                 visible_button = None
                 for b in buttons:

@@ -82,3 +82,8 @@ export const scrapeJamf = async (url: string) => {
     const response = await api.post('/scrape-jamf', { url });
     return response.data;
 };
+
+export const scrapeCanvas = async (url: string, category: string) => {
+    const response = await api.post('/scrape-canvas', { url, category });
+    return response.data;
+};

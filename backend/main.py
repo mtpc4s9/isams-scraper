@@ -13,6 +13,7 @@ from scrapers.flexischools_scraper import scrape_flexischools_category
 from scrapers.toddle_scraper import scrape_toddle
 from scrapers.powerschool_scraper import scrape_powerschool
 from scrapers.freshservice_scraper import scrape_freshservice
+from scrapers.canvas_scraper import scrape_canvas
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -37,6 +38,7 @@ class PublicScrapeRequest(BaseModel):
     role: Optional[str] = "Admin"
     headless: Optional[bool] = True
     topic: Optional[str] = "General"
+    category: Optional[str] = ""
 
 class PublicScrapeResponse(BaseModel):
     success: bool
@@ -177,6 +179,16 @@ def api_scrape_jamf(request: PublicScrapeRequest):
         
         md_content = f"---\nProduct: {result['product']}\nGroup: {result['group']}\nArticle Name: {result['article_name']}\nArticle Link: {result['article_link']}\n---\n\n{result['content']}"
         return PublicScrapeResponse(success=True, markdown_content=md_content, message=message)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-canvas", response_model=PublicScrapeResponse)
+def api_scrape_canvas(request: PublicScrapeRequest):
+    try:
+        markdown = scrape_canvas(request.url, request.category)
+        if markdown.startswith("Error"):
+             return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Canvas LMS Docs")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

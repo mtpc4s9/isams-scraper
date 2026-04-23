@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice } from '../api';
+import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen, Layers } from 'lucide-react';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice, scrapeCanvas } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice' | 'canvas'>('odoo');
     const [url, setUrl] = useState('');
     const [role, setRole] = useState('');
     const [topic, setTopic] = useState('');
+    const [category, setCategory] = useState('');
     const [markdown, setMarkdown] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
@@ -36,7 +37,9 @@ const PublicDocsTab = () => {
                         ? await scrapePowerschool(url, role, headless)
                         : activeTool === 'freshservice'
                             ? await scrapeFreshservice(url, topic)
-                            : await scrapeFlexischools(url);
+                            : activeTool === 'canvas'
+                                ? await scrapeCanvas(url, category)
+                                : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -88,6 +91,13 @@ const PublicDocsTab = () => {
             icon: <BookOpen className="w-5 h-5 text-indigo-500" />,
             desc: 'Extract sub-topic & articles via URLs.',
             placeholder: 'https://support.freshservice.com/support/solutions/folders/X'
+        },
+        {
+            id: 'canvas',
+            label: 'Canvas LMS',
+            icon: <Layers className="w-5 h-5 text-red-500" />,
+            desc: 'Extract guidelines & articles.',
+            placeholder: 'https://community.instructure.com/en/kb/categories/95-administrators'
         }
     ];
 
@@ -112,7 +122,7 @@ const PublicDocsTab = () => {
                         return (
                             <button
                                 key={tool.id}
-                                onClick={() => { setActiveTool(tool.id as any); setUrl(''); setMarkdown(''); setStatus(''); setTopic(''); setRole(''); }}
+                                onClick={() => { setActiveTool(tool.id as any); setUrl(''); setMarkdown(''); setStatus(''); setTopic(''); setRole(''); setCategory(''); }}
                                 className={cn(
                                     "w-full bento-item text-left transition-all duration-300 group relative overflow-hidden",
                                     isActive ? "ring-2 ring-primary border-primary bg-primary/5 shadow-xl shadow-primary/10" : "hover:border-primary/30"
@@ -190,6 +200,21 @@ const PublicDocsTab = () => {
                                     placeholder="Enter Main Topic (e.g., IT Operations)"
                                     value={topic}
                                     onChange={(e) => setTopic(e.target.value)}
+                                    className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                                />
+                            </div>
+                        )}
+
+                        {activeTool === 'canvas' && (
+                            <div className="relative group">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                                    <Layers className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Category Name (e.g., Guidelines)"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
                                     className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
                                 />
                             </div>
