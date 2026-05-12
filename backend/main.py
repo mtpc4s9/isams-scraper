@@ -14,6 +14,7 @@ from scrapers.toddle_scraper import scrape_toddle
 from scrapers.powerschool_scraper import scrape_powerschool
 from scrapers.freshservice_scraper import scrape_freshservice
 from scrapers.canvas_scraper import scrape_canvas
+from scrapers.seqta_scraper import scrape_seqta
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -189,6 +190,17 @@ def api_scrape_canvas(request: PublicScrapeRequest):
         if markdown.startswith("Error"):
              return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Canvas LMS Docs")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-seqta", response_model=PublicScrapeResponse)
+def api_scrape_seqta(request: PublicScrapeRequest):
+    try:
+        driver = auth_service.get_driver(headless=request.headless)
+        if not driver:
+            return PublicScrapeResponse(success=False, markdown_content="", message="Browser not initialized.")
+        articles_list, markdown = scrape_seqta(request.url, request.category, driver)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped SEQTA Resources")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

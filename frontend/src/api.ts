@@ -87,3 +87,8 @@ export const scrapeCanvas = async (url: string, category: string) => {
     const response = await api.post('/scrape-canvas', { url, category });
     return response.data;
 };
+
+export const scrapeSeqta = async (url: string, category: string, headless: boolean = true) => {
+    const response = await api.post('/scrape-seqta', { url, category, headless });
+    return response.data;
+};

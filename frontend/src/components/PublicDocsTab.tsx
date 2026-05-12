@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen, Layers } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice, scrapeCanvas } from '../api';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice, scrapeCanvas, scrapeSeqta } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice' | 'canvas'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice' | 'canvas' | 'seqta'>('odoo');
     const [url, setUrl] = useState('');
     const [role, setRole] = useState('');
     const [topic, setTopic] = useState('');
@@ -39,7 +39,9 @@ const PublicDocsTab = () => {
                             ? await scrapeFreshservice(url, topic)
                             : activeTool === 'canvas'
                                 ? await scrapeCanvas(url, category)
-                                : await scrapeFlexischools(url);
+                                : activeTool === 'seqta'
+                                    ? await scrapeSeqta(url, category, headless)
+                                    : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -97,7 +99,13 @@ const PublicDocsTab = () => {
             label: 'Canvas LMS',
             icon: <Layers className="w-5 h-5 text-red-500" />,
             desc: 'Extract guidelines & articles.',
-            placeholder: 'https://community.instructure.com/en/kb/categories/95-administrators'
+        },
+        {
+            id: 'seqta',
+            label: 'SEQTA Resources',
+            icon: <BookOpen className="w-5 h-5 text-teal-500" />,
+            desc: 'Extract SEQTA Help Checklists/Guidelines.',
+            placeholder: 'https://help.seqta.com.au/s/topic/...'
         }
     ];
 
@@ -205,7 +213,7 @@ const PublicDocsTab = () => {
                             </div>
                         )}
 
-                        {activeTool === 'canvas' && (
+                        {['canvas', 'seqta'].includes(activeTool) && (
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
                                     <Layers className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
