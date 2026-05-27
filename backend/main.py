@@ -15,6 +15,8 @@ from scrapers.powerschool_scraper import scrape_powerschool
 from scrapers.freshservice_scraper import scrape_freshservice
 from scrapers.canvas_scraper import scrape_canvas
 from scrapers.seqta_scraper import scrape_seqta
+from scrapers.salesforce_scraper import scrape_salesforce
+from scrapers.jira_scraper import scrape_jira
 
 app = FastAPI(title="iSAMS Documentation Scraper")
 
@@ -40,6 +42,7 @@ class PublicScrapeRequest(BaseModel):
     headless: Optional[bool] = True
     topic: Optional[str] = "General"
     category: Optional[str] = ""
+    module: Optional[str] = ""
 
 class PublicScrapeResponse(BaseModel):
     success: bool
@@ -201,6 +204,29 @@ def api_scrape_seqta(request: PublicScrapeRequest):
             return PublicScrapeResponse(success=False, markdown_content="", message="Browser not initialized.")
         articles_list, markdown = scrape_seqta(request.url, request.category, driver)
         return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped SEQTA Resources")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-salesforce", response_model=PublicScrapeResponse)
+def api_scrape_salesforce(request: PublicScrapeRequest):
+    try:
+        markdown = scrape_salesforce(request.url, request.module)
+        if markdown.startswith("Error"):
+             return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Salesforce Guideline")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scrape-jira", response_model=PublicScrapeResponse)
+def api_scrape_jira(request: PublicScrapeRequest):
+    try:
+        driver = auth_service.get_driver(headless=request.headless)
+        if not driver:
+            return PublicScrapeResponse(success=False, markdown_content="", message="Browser not initialized.")
+        markdown = scrape_jira(request.url, request.topic, driver, request.headless)
+        if markdown.startswith("Error"):
+             return PublicScrapeResponse(success=False, markdown_content="", message=markdown)
+        return PublicScrapeResponse(success=True, markdown_content=markdown, message="Successfully scraped Jira Scrum guidelines")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

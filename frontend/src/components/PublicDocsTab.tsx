@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Globe, Terminal, Loader2, AlertCircle, Search, FileText, ChevronRight, BookOpen, Layers } from 'lucide-react';
-import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice, scrapeCanvas, scrapeSeqta } from '../api';
+import { scrapeOdoo, scrapePromptingGuide, scrapeFlexischools, scrapePowerschool, scrapeFreshservice, scrapeCanvas, scrapeSeqta, scrapeSalesforce, scrapeJira } from '../api';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PublicDocsTab = () => {
-    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice' | 'canvas' | 'seqta'>('odoo');
+    const [activeTool, setActiveTool] = useState<'odoo' | 'prompting' | 'flexischools' | 'powerschool' | 'freshservice' | 'canvas' | 'seqta' | 'salesforce' | 'jira'>('odoo');
     const [url, setUrl] = useState('');
     const [role, setRole] = useState('');
     const [topic, setTopic] = useState('');
     const [category, setCategory] = useState('');
+    const [moduleName, setModuleName] = useState('');
     const [markdown, setMarkdown] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
@@ -41,7 +42,11 @@ const PublicDocsTab = () => {
                                 ? await scrapeCanvas(url, category)
                                 : activeTool === 'seqta'
                                     ? await scrapeSeqta(url, category, headless)
-                                    : await scrapeFlexischools(url);
+                                    : activeTool === 'salesforce'
+                                        ? await scrapeSalesforce(url, moduleName)
+                                        : activeTool === 'jira'
+                                            ? await scrapeJira(url, topic, headless)
+                                            : await scrapeFlexischools(url);
 
             clearInterval(timer);
 
@@ -106,6 +111,20 @@ const PublicDocsTab = () => {
             icon: <BookOpen className="w-5 h-5 text-teal-500" />,
             desc: 'Extract SEQTA Help Checklists/Guidelines.',
             placeholder: 'https://help.seqta.com.au/s/topic/...'
+        },
+        {
+            id: 'salesforce',
+            label: 'Salesforce Guideline',
+            icon: <Globe className="w-5 h-5 text-blue-600" />,
+            desc: 'Extract Salesforce guidelines for NotebookLM.',
+            placeholder: 'https://www.salesforce.com/eu/sales/sales-management/'
+        },
+        {
+            id: 'jira',
+            label: 'JIRA Scraper',
+            icon: <Layers className="w-5 h-5 text-blue-400" />,
+            desc: 'Atlassian JIRA Software Cloud guidelines.',
+            placeholder: 'https://support.atlassian.com/jira-software-cloud/resources/'
         }
     ];
 
@@ -130,7 +149,16 @@ const PublicDocsTab = () => {
                         return (
                             <button
                                 key={tool.id}
-                                onClick={() => { setActiveTool(tool.id as any); setUrl(''); setMarkdown(''); setStatus(''); setTopic(''); setRole(''); setCategory(''); }}
+                                onClick={() => { 
+                                    setActiveTool(tool.id as any); 
+                                    setUrl(tool.id === 'jira' ? 'https://support.atlassian.com/jira-software-cloud/resources/' : ''); 
+                                    setMarkdown(''); 
+                                    setStatus(''); 
+                                    setTopic(''); 
+                                    setRole(''); 
+                                    setCategory(''); 
+                                    setModuleName(''); 
+                                }}
                                 className={cn(
                                     "w-full bento-item text-left transition-all duration-300 group relative overflow-hidden",
                                     isActive ? "ring-2 ring-primary border-primary bg-primary/5 shadow-xl shadow-primary/10" : "hover:border-primary/30"
@@ -198,14 +226,14 @@ const PublicDocsTab = () => {
                             </div>
                         )}
 
-                        {activeTool === 'freshservice' && (
+                        {['freshservice', 'jira'].includes(activeTool) && (
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
                                     <FileText className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="Enter Main Topic (e.g., IT Operations)"
+                                    placeholder={activeTool === 'jira' ? "Enter Topic (e.g., Manage Jira Cloud spaces)" : "Enter Main Topic (e.g., IT Operations)"}
                                     value={topic}
                                     onChange={(e) => setTopic(e.target.value)}
                                     className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
@@ -223,6 +251,22 @@ const PublicDocsTab = () => {
                                     placeholder="Enter Category Name (e.g., Guidelines)"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
+                                    className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
+                                
+                                />
+                            </div>
+                        )}
+
+                        {activeTool === 'salesforce' && (
+                            <div className="relative group">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
+                                    <Layers className="w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Module Name (e.g., Sales Management)"
+                                    value={moduleName}
+                                    onChange={(e) => setModuleName(e.target.value)}
                                     className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
                                 />
                             </div>

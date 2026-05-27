@@ -92,3 +92,13 @@ export const scrapeSeqta = async (url: string, category: string, headless: boole
     const response = await api.post('/scrape-seqta', { url, category, headless });
     return response.data;
 };
+
+export const scrapeSalesforce = async (url: string, module: string) => {
+    const response = await api.post('/scrape-salesforce', { url, module });
+    return response.data;
+};
+
+export const scrapeJira = async (url: string, topic: string, headless: boolean = true) => {
+    const response = await api.post('/scrape-jira', { url, topic, headless });
+    return response.data;
+};
