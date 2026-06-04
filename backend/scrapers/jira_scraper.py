@@ -265,7 +265,8 @@ def scrape_jira(url: str, topic: str, driver, headless: bool = True) -> str:
         except Exception:
             continue
             
-    articles_to_scrape = articles_to_scrape[:50]
+    # Remove artificial limit to allow scraping all available articles in a topic
+    # articles_to_scrape = articles_to_scrape[:50]
     
     if not articles_to_scrape:
         return f"Error: No guidelines found under the topic '{matched_text}'."
@@ -278,8 +279,19 @@ def scrape_jira(url: str, topic: str, driver, headless: bool = True) -> str:
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
     })
     
+    # Determine a friendly title prefix based on the Atlassian product in the URL
+    product_title = "Atlassian Support"
+    if "jira-service-management-cloud" in url:
+        product_title = "Jira Service Management"
+    elif "jira-software-cloud" in url:
+        product_title = "Jira Software"
+    elif "confluence-cloud" in url:
+        product_title = "Confluence"
+    elif "jira" in url:
+        product_title = "Jira"
+
     combined_markdown = (
-        f"# JIRA Scrum Guidelines: {matched_text}\n"
+        f"# {product_title} Guidelines: {matched_text}\n"
         f"**Source Resources**: {url}\n"
         f"**Topic Category (Manual)**: {topic}\n"
         f"**Total Articles Scraped**: {len(articles_to_scrape)}\n\n"

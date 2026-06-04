@@ -121,9 +121,9 @@ const PublicDocsTab = () => {
         },
         {
             id: 'jira',
-            label: 'JIRA Scraper',
+            label: 'Jira / Atlassian',
             icon: <Layers className="w-5 h-5 text-blue-400" />,
-            desc: 'Atlassian JIRA Software Cloud guidelines.',
+            desc: 'Atlassian Cloud resources scraper (Software, ITSM, Confluence).',
             placeholder: 'https://support.atlassian.com/jira-software-cloud/resources/'
         }
     ];
@@ -211,6 +211,45 @@ const PublicDocsTab = () => {
                             />
                         </div>
 
+                        {activeTool === 'jira' && (
+                            <div className="flex flex-wrap gap-2 items-center p-1 bg-secondary/5 rounded-2xl border border-border/40">
+                                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest pl-3 pr-2">Quick-Fill URL:</span>
+                                <button
+                                    onClick={() => setUrl('https://support.atlassian.com/jira-software-cloud/resources/')}
+                                    className={cn(
+                                        "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+                                        url === 'https://support.atlassian.com/jira-software-cloud/resources/'
+                                            ? "bg-blue-500/10 border-blue-500/30 text-blue-400 shadow-sm shadow-blue-500/5"
+                                            : "bg-surface border-border text-secondary hover:text-primary hover:border-primary/30"
+                                    )}
+                                >
+                                    🔵 Jira Software
+                                </button>
+                                <button
+                                    onClick={() => setUrl('https://support.atlassian.com/jira-service-management-cloud/resources/')}
+                                    className={cn(
+                                        "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+                                        url === 'https://support.atlassian.com/jira-service-management-cloud/resources/'
+                                            ? "bg-green-500/10 border-green-500/30 text-green-400 shadow-sm shadow-green-500/5"
+                                            : "bg-surface border-border text-secondary hover:text-primary hover:border-primary/30"
+                                    )}
+                                >
+                                    🟢 Jira ITSM
+                                </button>
+                                <button
+                                    onClick={() => setUrl('https://support.atlassian.com/confluence-cloud/resources/')}
+                                    className={cn(
+                                        "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+                                        url === 'https://support.atlassian.com/confluence-cloud/resources/'
+                                            ? "bg-purple-500/10 border-purple-500/30 text-purple-400 shadow-sm shadow-purple-500/5"
+                                            : "bg-surface border-border text-secondary hover:text-primary hover:border-primary/30"
+                                    )}
+                                >
+                                    🟣 Confluence
+                                </button>
+                            </div>
+                        )}
+
                         {activeTool === 'powerschool' && (
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 p-1 bg-secondary/10 rounded-md">
@@ -233,7 +272,7 @@ const PublicDocsTab = () => {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={activeTool === 'jira' ? "Enter Topic (e.g., Manage Jira Cloud spaces)" : "Enter Main Topic (e.g., IT Operations)"}
+                                    placeholder={activeTool === 'jira' ? "Enter Topic (e.g. Discover IT service management (ITSM) / Manage spaces)" : "Enter Main Topic (e.g., IT Operations)"}
                                     value={topic}
                                     onChange={(e) => setTopic(e.target.value)}
                                     className="w-full bg-surface border-2 border-border rounded-2xl py-4 pl-14 pr-4 font-mono text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-secondary/50"
